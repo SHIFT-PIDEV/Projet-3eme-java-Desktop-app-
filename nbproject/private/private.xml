@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/pc/Desktop/CRUD_coupon/src/controller/acceuil_coupon_controller.java</file>
+            <file>file:/C:/Users/pc/Desktop/CRUD_coupon/src/controller/ListeData.java</file>
+            <file>file:/C:/Users/pc/Desktop/CRUD_coupon/src/controller/afficher_coupon_controller.java</file>
+            <file>file:/C:/Users/pc/Desktop/CRUD_coupon/src/controller/ajouter_coupon_controller.java</file>
+            <file>file:/C:/Users/pc/Desktop/CRUD_coupon/src/crud_coupon/CRUD_coupon.java</file>
+            <file>file:/C:/Users/pc/Desktop/CRUD_coupon/src/entity/Coupon.java</file>
+            <file>file:/C:/Users/pc/Desktop/CRUD_coupon/src/utils/ConnexionSingleton.java</file>
+            <file>file:/C:/Users/pc/Desktop/CRUD_coupon/src/service/couponService.java</file>
+            <file>file:/C:/Users/pc/Desktop/CRUD_coupon/src/service/service.java</file>
+        </group>
+    </open-files>
+</project-private>
