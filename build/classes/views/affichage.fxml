@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="526.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AffichageController">
+   <children>
+      <TableView fx:id="tableEvent" layoutX="42.0" layoutY="82.0" prefHeight="394.0" prefWidth="657.0">
+        <columns>
+          <TableColumn fx:id="ide" prefWidth="59.0" text="ID Event" />
+          <TableColumn fx:id="idf" prefWidth="79.0" text="ID Formateur" />
+            <TableColumn fx:id="ne" prefWidth="96.0" text="Nom Event" />
+            <TableColumn fx:id="dd" prefWidth="100.0" text="Date Debut" />
+            <TableColumn fx:id="desc" prefWidth="201.0" text="description" />
+            <TableColumn fx:id="du" prefWidth="120.0" text="Duree" />
+        </columns>
+      </TableView>
+      <TextField fx:id="searchBar" layoutX="296.0" layoutY="40.0" promptText="search" />
+   </children>
+</AnchorPane>

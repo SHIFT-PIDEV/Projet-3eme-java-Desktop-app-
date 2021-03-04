@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AcceuilController">
+   <children>
+      <Button fx:id="btn_Ajout" layoutX="89.0" layoutY="63.0" mnemonicParsing="false" onAction="#ajoutEvent" prefHeight="25.0" prefWidth="211.0" text="Ajouter un event" textFill="#4ed709">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_updateDelete" layoutX="89.0" layoutY="141.0" mnemonicParsing="false" onAction="#suppModifEvent" prefHeight="25.0" prefWidth="211.0" text="supprimer ou modifier un event" textFill="#e80909">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_affichE" layoutX="89.0" layoutY="231.0" mnemonicParsing="false" onAction="#afficherE" prefHeight="25.0" prefWidth="211.0" text="afficher les eventson" textFill="#9a9808">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
