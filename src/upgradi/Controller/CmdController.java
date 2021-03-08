@@ -5,18 +5,33 @@
  */
 package upgradi.Controller;
 
+import java.io.IOException;
 import java.net.URL;
+import static java.util.Collections.list;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import upgradi.Entities.PaymentMethod;
+import upgradi.Services.PaymentService;
 
 /**
  * FXML Controller class
@@ -25,6 +40,7 @@ import javafx.scene.layout.HBox;
  */
 public class CmdController implements Initializable {
 
+    private ListDataPayment listdata = new ListDataPayment();
     @FXML
     private AnchorPane body;
     @FXML
@@ -115,15 +131,18 @@ public class CmdController implements Initializable {
     private TextField cvc;
     @FXML
     private Button btn_payez;
-
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+       /* */
+      // listview.setItems(listdata.getPaymentMethod());
+      // label_nom.setText();
     }    
-
+    
     @FXML
     private void coursClick(MouseEvent event) {
     }
@@ -135,5 +154,27 @@ public class CmdController implements Initializable {
     @FXML
     private void examenClick(MouseEvent event) {
     }
+
+    @FXML
+    private void pay(ActionEvent event) {
+          PaymentMethod c;
+          c = new PaymentMethod(nom.getText(),prenom.getText(),email.getText(),pays.getText(),Integer.parseInt(codepostal.getText()),Integer.parseInt(numcarte.getText()),date.getText(),Integer.parseInt(cvc.getText()));
+            
+            try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/cmd_details.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+            PaymentService cserv= PaymentService.getInstance();
+            cserv.insert(c);
+           
+    }
+
+  
     
 }

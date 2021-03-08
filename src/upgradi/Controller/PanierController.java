@@ -175,12 +175,20 @@ public class PanierController implements Initializable {
         
             PanierService cserv= PanierService.getInstance();
             cserv.insert(c);
-           
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+         try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/panier.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Panier insérée avec succés!");
-        alert.show();
+        alert.show();*/
         nom.setText("");
         prix.setText("");
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -185,21 +186,21 @@
          <font>
             <Font size="30.0" />
          </font></Label>
-      <TabPane layoutX="244.0" layoutY="98.0" prefHeight="424.0" prefWidth="503.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="244.0" layoutY="98.0" prefHeight="424.0" prefWidth="503.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="244.0" AnchorPane.rightAnchor="73.0" AnchorPane.topAnchor="98.0">
         <tabs>
           <Tab>
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="nom" layoutX="22.0" layoutY="33.0" prefHeight="25.0" prefWidth="207.0" promptText="Nom" />
-                        <TextField fx:id="prenom" layoutX="266.0" layoutY="33.0" prefHeight="25.0" prefWidth="207.0" promptText="Prénom" />
-                        <TextField fx:id="email" layoutX="23.0" layoutY="103.0" prefHeight="25.0" prefWidth="459.0" promptText="Email" />
+                        <TextField fx:id="prenom" layoutX="283.0" layoutY="33.0" prefHeight="25.0" prefWidth="197.0" promptText="Prénom" />
+                        <TextField fx:id="email" layoutX="22.0" layoutY="103.0" prefHeight="25.0" prefWidth="459.0" promptText="Email" />
                         <TextField fx:id="pays" layoutX="23.0" layoutY="163.0" prefHeight="25.0" prefWidth="261.0" promptText="Pays" />
-                        <TextField fx:id="codepostal" layoutX="331.0" layoutY="163.0" prefHeight="25.0" prefWidth="149.0" promptText="Pays" />
+                        <TextField fx:id="codepostal" layoutX="331.0" layoutY="163.0" prefHeight="25.0" prefWidth="149.0" promptText="Code postal" />
                         <TextField fx:id="numcarte" layoutX="23.0" layoutY="219.0" prefHeight="25.0" prefWidth="459.0" promptText="Numero Carte" />
                         <TextField fx:id="date" layoutX="79.0" layoutY="270.0" prefHeight="25.0" prefWidth="149.0" promptText="MM/YY" />
                         <TextField fx:id="cvc" layoutX="273.0" layoutY="270.0" prefHeight="25.0" prefWidth="149.0" promptText="CVC" />
-                        <Button fx:id="btn_payez" layoutX="228.0" layoutY="338.0" mnemonicParsing="false" style="-fx-background-color: #1fcc33;" text="Payez" textFill="WHITE" />
+                        <Button fx:id="btn_payez" layoutX="228.0" layoutY="338.0" mnemonicParsing="false" onAction="#pay" style="-fx-background-color: #1fcc33;" text="Payez" textFill="WHITE" />
                      </children>
                   </AnchorPane>
             </content>
@@ -208,6 +209,9 @@
                      <image>
                         <Image url="@img/cc-icon.png" />
                      </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
                   </ImageView>
                </graphic>
           </Tab>
