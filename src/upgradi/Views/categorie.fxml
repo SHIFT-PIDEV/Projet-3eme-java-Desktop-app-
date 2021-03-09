@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="820.0" styleClass="body" stylesheets="@StyleSheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="upgradi.Controller.categorieController">
+   <children>
+      <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="580.0" prefWidth="197.0" styleClass="sidebar" stylesheets="@StyleSheet.css" AnchorPane.bottomAnchor="1.0" AnchorPane.topAnchor="-1.0">
+         <children>
+            <ImageView fx:id="userimg" fitHeight="68.0" fitWidth="79.0" layoutX="65.0" layoutY="14.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/user_img.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="username" layoutX="69.0" layoutY="92.0" text="Admin" textFill="WHITE" />
+            <HBox fx:id="acceuil" layoutX="46.0" layoutY="132.0" onMouseClicked="#acceuilClick" prefHeight="17.0" prefWidth="106.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
+               <children>
+                  <ImageView fx:id="icon_home" fitHeight="25.0" fitWidth="25.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/acceuil_img.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="label_acceuil" prefHeight="25.0" prefWidth="106.0" text="  Acceuil" textAlignment="JUSTIFY" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator layoutX="11.0" layoutY="165.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
+            <Separator layoutX="11.0" layoutY="125.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
+            <HBox fx:id="cours" layoutX="46.0" layoutY="174.0" prefHeight="17.0" prefWidth="122.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
+               <children>
+                  <ImageView fx:id="icon_cour" fitHeight="25.0" fitWidth="25.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/cours_img.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="label_cour" prefHeight="25.0" prefWidth="106.0" text="  Nos Cours" textAlignment="JUSTIFY" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator layoutX="11.0" layoutY="205.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
+            <HBox fx:id="categorie" layoutX="47.0" layoutY="213.0" prefHeight="17.0" prefWidth="122.0" styleClass="panier" stylesheets="@StyleSheet.css">
+               <children>
+                  <ImageView fx:id="icon_panier" fitHeight="25.0" fitWidth="25.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/panier.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="label_categorie" prefHeight="25.0" prefWidth="106.0" text=" Categorie" textAlignment="JUSTIFY" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator layoutX="11.0" layoutY="246.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
+            <HBox fx:id="pack" layoutX="47.0" layoutY="256.0" prefHeight="25.0" prefWidth="122.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
+               <children>
+                  <ImageView fx:id="icon_pack" fitHeight="25.0" fitWidth="25.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/packs.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="label_pack" prefHeight="25.0" prefWidth="106.0" text="  Nos Packs" textAlignment="JUSTIFY" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator layoutX="11.0" layoutY="289.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
+            <HBox fx:id="demande" layoutX="48.0" layoutY="296.0" prefHeight="25.0" prefWidth="143.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
+               <children>
+                  <ImageView fx:id="icon_demande" fitHeight="25.0" fitWidth="25.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/demande.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="label_demande" prefHeight="25.0" prefWidth="129.0" text="  Deviens Formateur" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator layoutX="11.0" layoutY="328.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
+            <HBox fx:id="event" layoutX="47.0" layoutY="335.0" prefHeight="25.0" prefWidth="122.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
+               <children>
+                  <ImageView fx:id="icon_event" fitHeight="25.0" fitWidth="25.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/events_img.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="label_event" prefHeight="25.0" prefWidth="106.0" text="  Événements" textAlignment="JUSTIFY" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator layoutX="11.0" layoutY="368.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
+            <HBox fx:id="news" layoutX="47.0" layoutY="377.0" prefHeight="25.0" prefWidth="122.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
+               <children>
+                  <ImageView fx:id="icon_news" fitHeight="25.0" fitWidth="25.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/news_img.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="label_news" prefHeight="25.0" prefWidth="106.0" text="  Actualités" textAlignment="JUSTIFY" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator layoutX="11.0" layoutY="410.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
+            <HBox fx:id="reclamation" layoutX="47.0" layoutY="420.0" prefHeight="25.0" prefWidth="122.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
+               <children>
+                  <ImageView fx:id="icon_reclamation" fitHeight="25.0" fitWidth="25.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/reclamation.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="label_reclamation" prefHeight="25.0" prefWidth="106.0" text="  Réclamation" textAlignment="JUSTIFY" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator layoutX="11.0" layoutY="452.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
+            <HBox fx:id="wishlist" layoutX="47.0" layoutY="460.0" prefHeight="25.0" prefWidth="122.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
+               <children>
+                  <ImageView fx:id="icon_wishlist" fitHeight="25.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/wishlist.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="label_wishlist" prefHeight="25.0" prefWidth="106.0" text="  Wish List" textAlignment="JUSTIFY" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator layoutX="11.0" layoutY="492.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
+            <ImageView fx:id="icon_signout" fitHeight="17.0" fitWidth="18.0" layoutX="14.0" layoutY="549.0" opacity="0.7" pickOnBounds="true" preserveRatio="true" styleClass="icon_signout" AnchorPane.bottomAnchor="14.0">
+               <image>
+                  <Image url="@img/signout.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="label_signout" layoutX="49.0" layoutY="541.0" opacity="0.7" prefHeight="17.0" prefWidth="90.0" styleClass="label_signout" stylesheets="@StyleSheet.css" text="  Se déconnecter" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.bottomAnchor="14.0" />
+            <HBox fx:id="exam" layoutX="47.0" layoutY="500.0" prefHeight="25.0" prefWidth="122.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
+               <children>
+                  <ImageView fx:id="icon_exam" fitHeight="25.0" fitWidth="32.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/exam.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="label_exam" prefHeight="25.0" prefWidth="106.0" text="  Examens" textAlignment="JUSTIFY" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator layoutX="12.0" layoutY="531.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
+         </children>
+      </AnchorPane>
+      <TabPane layoutX="196.0" prefHeight="580.0" prefWidth="625.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Ajouter categorie">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="552.0" prefWidth="625.0">
+                           <children>
+                              <TextField fx:id="nomcat" layoutX="281.0" layoutY="232.0" />
+                              <Label layoutX="161.0" layoutY="236.0" prefHeight="17.0" prefWidth="103.0" text="Nom categorie :" />
+                              <Label layoutX="299.0" layoutY="62.0" style="-fx-text-fill: red;" text="Bienvenue" />
+                              <Button fx:id="btn_valider" layoutX="473.0" layoutY="471.0" mnemonicParsing="false" onAction="#ajouter_categorie" prefHeight="25.0" prefWidth="103.0" text="valider" />
+                              <TextField fx:id="id1" layoutX="484.0" layoutY="125.0" prefHeight="25.0" prefWidth="84.0" />
+                              <Label fx:id="col_id" layoutX="425.0" layoutY="129.0" prefHeight="17.0" prefWidth="54.0" text="id" />
+                              <Button fx:id="btn_find" layoutX="574.0" layoutY="125.0" mnemonicParsing="false" onAction="#find_categorie" text="find" />
+                              <Button fx:id="btn_mod" layoutX="340.0" layoutY="471.0" mnemonicParsing="false" onAction="#modifier_categorie" prefHeight="25.0" prefWidth="90.0" text="Modifier" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Afficher categorie">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="552.0" prefWidth="625.0">
+                           <children>
+                              <TableView fx:id="categorietable" layoutX="93.0" layoutY="61.0" prefHeight="200.0" prefWidth="413.0">
+                                <columns>
+                                  <TableColumn fx:id="id" prefWidth="208.0" text="id" />
+                                  <TableColumn fx:id="nom_categorie" prefWidth="204.0" text="nom cour" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="btn_supp" layoutX="216.0" layoutY="474.0" mnemonicParsing="false" onAction="#supprimer_categorie" prefHeight="25.0" prefWidth="76.0" text="supprimer" />
+                              <TextField fx:id="t_id" layoutX="107.0" layoutY="475.0" prefHeight="25.0" prefWidth="76.0" />
+                              <Label layoutX="37.0" layoutY="479.0" text="ID" />
+                              <Button fx:id="trie" layoutX="428.0" layoutY="474.0" mnemonicParsing="false" onAction="#Tri" text="trie" />
+                           </children>
+                        </AnchorPane>
+                        <TextField fx:id="searchBar" layoutX="228.0" layoutY="22.0" promptText="Search" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
