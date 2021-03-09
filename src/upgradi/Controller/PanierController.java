@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -117,17 +119,21 @@ public class PanierController implements Initializable {
     @FXML
     private TableView<Panier> tablePanier;
     @FXML
-    private TableColumn<?, ?> id;
+    private TableColumn<Panier, ?> id;
     @FXML
-    private TableColumn<?, ?> nom1;
+    private TableColumn<Panier, ?> nom1;
     @FXML
-    private TableColumn<?, ?> prix1;
+    private TableColumn<Panier, ?> prix1;
     @FXML
     private TextField supp;
     @FXML
     private Button btn_delete;
     @FXML
     private Button btn_order;
+    @FXML
+    private Button btn_delete1;
+    @FXML
+    private TextField searchBar;
 
     /**
      * Initializes the controller class.
@@ -139,6 +145,25 @@ public class PanierController implements Initializable {
        id.setCellValueFactory(new PropertyValueFactory<>("id"));
        nom1.setCellValueFactory(new PropertyValueFactory<>("nom"));
        prix1.setCellValueFactory(new PropertyValueFactory<>("prix"));
+       
+       FilteredList<Panier> filteredData = new FilteredList<>(listdata.getPanier(), b -> true);  
+       searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+       filteredData.setPredicate(e -> {
+        if (newValue == null || newValue.isEmpty()) {
+            return true;
+        }    
+       String lowerCaseFilter = newValue.toLowerCase();
+       if (e.getNom().toLowerCase().contains(lowerCaseFilter) ) {
+            return true; 
+        }
+         else  
+          return false; 
+        });
+       });
+    SortedList<Panier> sortedData = new SortedList<>(filteredData);  
+    sortedData.comparatorProperty().bind(tablePanier.comparatorProperty());  
+    tablePanier.setItems(sortedData);    
+     
        btn_order.setOnAction(event -> {
 
             try {
@@ -218,6 +243,7 @@ public class PanierController implements Initializable {
         int id = Integer.parseInt(supp.getText());
             PanierService cserv= PanierService.getInstance();
             cserv.delete(id);
+            
             try {
                 Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/panier.fxml"));
                 Scene scene = new Scene(page1);
@@ -225,7 +251,30 @@ public class PanierController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException ex) {
-                Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PanierController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+        /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Element supprimé avec succés!");
+        alert.show();
+        supp.setText("");*/
+    }
+     @FXML
+    private void supp_panier_all(ActionEvent event) {
+        
+            PanierService cserv= PanierService.getInstance();
+            cserv.deleteAll();
+            
+            try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/panier.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(PanierController.class.getName()).log(Level.SEVERE, null, ex);
             }
            
         /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -236,6 +285,16 @@ public class PanierController implements Initializable {
         supp.setText("");*/
     }
 
-    
-    
+    @FXML
+    private void Tri(ActionEvent event) {
+        prix1.setSortType(TableColumn.SortType.DESCENDING);
+        tablePanier.getSortOrder().add(prix1);
+        tablePanier.sort();
+    }
 }
+
+    
+
+    
+    
+
