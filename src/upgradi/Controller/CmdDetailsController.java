@@ -7,10 +7,7 @@ package upgradi.Controller;
 
 import java.io.IOException;
 import java.net.URL;
-import static java.util.Collections.list;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,35 +15,45 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import upgradi.Entities.PaymentMethod;
 import upgradi.Services.PaymentService;
 
 /**
- * FXML Controller class
  *
  * @author Fedy
  */
-public class CmdController implements Initializable {
+public class CmdDetailsController implements Initializable{
 
-    //
+    private ListDataPayment listdata = new ListDataPayment();
     @FXML
     private AnchorPane body;
+    @FXML
+    private TableView<PaymentMethod> tablepayment;
+    @FXML
+    private TableColumn<PaymentMethod, ?> nom1;
+    @FXML
+    private TableColumn<PaymentMethod, ?> prenom1;
+    @FXML
+    private TableColumn<PaymentMethod, ?> email1;
+    @FXML
+    private TableColumn<PaymentMethod, ?> pays1;
+    @FXML
+    private TableColumn<PaymentMethod, ?> codepostal1;
+    @FXML
+    private TableColumn<PaymentMethod, ?> num1;
+    @FXML
+    private TableColumn<PaymentMethod, ?> date1;
+    @FXML
+    private TableColumn<PaymentMethod, ?> cvv1;
     @FXML
     private ImageView userimg;
     @FXML
@@ -117,51 +124,15 @@ public class CmdController implements Initializable {
     private Label label_exam;
     @FXML
     private Label label_cmd;
-    @FXML
-    private TextField nom;
-    @FXML
-    private TextField prenom;
-    @FXML
-    private TextField email;
-    @FXML
-    private TextField pays;
-    @FXML
-    private TextField codepostal;
-    @FXML
-    private TextField numcarte;
-    @FXML
-    private TextField date;
-    @FXML
-    private TextField cvc;
-   /* @FXML
-    private TableColumn<PaymentMethod, ?> nom1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> prenom1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> email1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> pays1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> codepostal1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> num1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> date1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> cvv1;
-    @FXML
-    private TableView<PaymentMethod> tablepayment;*/
-    @FXML
-    private Button btn_payez;
-    
-    /**
+
+     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
       
-    /* tablepayment.setItems(listdata.getPaymentMethod());
+    tablepayment.setItems(listdata.getPaymentMethod());
      nom1.setCellValueFactory(new PropertyValueFactory<>("nom"));
      prenom1.setCellValueFactory(new PropertyValueFactory<>("prenom"));
      email1.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -169,7 +140,7 @@ public class CmdController implements Initializable {
      codepostal1.setCellValueFactory(new PropertyValueFactory<>("codepostal"));
      num1.setCellValueFactory(new PropertyValueFactory<>("numcarte"));
      date1.setCellValueFactory(new PropertyValueFactory<>("datecarte"));
-     cvv1.setCellValueFactory(new PropertyValueFactory<>("cvc"));*/
+     cvv1.setCellValueFactory(new PropertyValueFactory<>("cvc"));
     }    
     
     @FXML
@@ -185,26 +156,32 @@ public class CmdController implements Initializable {
     }
 
     @FXML
-    private void paymentAction(ActionEvent event) {
-        PaymentMethod c;
-          c = new PaymentMethod(nom.getText(),prenom.getText(),email.getText(),pays.getText(),Integer.parseInt(codepostal.getText()),Integer.parseInt(numcarte.getText()),date.getText(),Integer.parseInt(cvc.getText()));
-            
+    private void Modifier(ActionEvent event) {
+        PaymentService cserv= PaymentService.getInstance();
+            cserv.delete();
             try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/cmd.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+    }
+    }
+    @FXML
+    private void Valider(ActionEvent event) {
+    }
+
+    @FXML
+    private void actualiser(ActionEvent event) {
+        try {
                 Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/cmd_details.fxml"));
                 Scene scene = new Scene(page1);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException ex) {
-                Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-            PaymentService cserv= PaymentService.getInstance();
-            cserv.insert(c);
     }
-
-   
-
-  
+    }
     
 }

@@ -20,7 +20,7 @@ import upgradi.Utils.connexionBD;
  *
  * @author Fedy
  */
-public class PaymentService implements Iservice<PaymentMethod>{
+public class PaymentService implements IservicePayment<PaymentMethod>{
 
     private static PaymentService  instance;
     private Statement st;
@@ -53,7 +53,7 @@ public class PaymentService implements Iservice<PaymentMethod>{
     }
 
     @Override
-    public void delete(int id) {
+    public void delete() {
         String req="delete from paymentmethod";
         
               try {

@@ -60,7 +60,7 @@ public class PanierService implements Iservice<Panier>{
   
     public void delete(int id) {
         String req="delete from panier where id="+id;
-        Panier p=displayById(id);
+        //Panier p=displayById(id);
         
               try {
            

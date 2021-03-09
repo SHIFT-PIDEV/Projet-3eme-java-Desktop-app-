@@ -198,7 +198,7 @@ public class PanierController implements Initializable {
     private void supp_panier(ActionEvent event) {
         int id = Integer.parseInt(supp.getText());
             PanierService cserv= PanierService.getInstance();
-            cserv.delete(id);
+           // cserv.delete(id);
            
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");

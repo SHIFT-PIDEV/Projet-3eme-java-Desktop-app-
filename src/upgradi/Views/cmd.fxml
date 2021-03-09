@@ -200,7 +200,7 @@
                         <TextField fx:id="numcarte" layoutX="23.0" layoutY="219.0" prefHeight="25.0" prefWidth="459.0" promptText="Numero Carte" />
                         <TextField fx:id="date" layoutX="79.0" layoutY="270.0" prefHeight="25.0" prefWidth="149.0" promptText="MM/YY" />
                         <TextField fx:id="cvc" layoutX="273.0" layoutY="270.0" prefHeight="25.0" prefWidth="149.0" promptText="CVC" />
-                        <Button fx:id="btn_payez" layoutX="228.0" layoutY="338.0" mnemonicParsing="false" onAction="#pay" style="-fx-background-color: #1fcc33;" text="Payez" textFill="WHITE" />
+                        <Button fx:id="btn_payez" layoutX="228.0" layoutY="338.0" mnemonicParsing="false" onAction="#paymentAction" style="-fx-background-color: #1fcc33;" text="Payez" textFill="WHITE" />
                      </children>
                   </AnchorPane>
             </content>
