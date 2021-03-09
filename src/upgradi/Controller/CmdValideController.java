@@ -18,18 +18,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
+ * FXML Controller class
  *
  * @author Fedy
  */
-public class CmdSuccessController implements Initializable{
+public class CmdValideController implements Initializable {
 
-    @FXML
-    private AnchorPane body;
     @FXML
     private ImageView userimg;
     @FXML
@@ -103,11 +101,14 @@ public class CmdSuccessController implements Initializable{
     @FXML
     private Label label_cmd1;
 
+    /**
+     * Initializes the controller class.
+     */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
+
     @FXML
     private void coursClick(MouseEvent event) {
     }
@@ -122,8 +123,14 @@ public class CmdSuccessController implements Initializable{
 
     @FXML
     private void retour(ActionEvent event) {
-       
+         try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/acceuil.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
     }
-    
+    }
     
 }

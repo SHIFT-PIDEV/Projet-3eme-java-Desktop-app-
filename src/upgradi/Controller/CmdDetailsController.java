@@ -186,7 +186,7 @@ public class CmdDetailsController implements Initializable{
     private void valider(ActionEvent event) {
          
              try {
-                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/acceuil.fxml"));
+                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/cmd_valide.fxml"));
                 Scene scene = new Scene(page1);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(scene);
@@ -198,11 +198,11 @@ public class CmdDetailsController implements Initializable{
             cserv.deleteB();
             PanierService pserv = PanierService.getInstance();
             pserv.deleteAll();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            /*Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Commande");
             alert.setHeaderText(null);
             alert.setContentText("Commande Validé!");
-            alert.show();
+            alert.show();*/
     }
     
 }

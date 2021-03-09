@@ -172,9 +172,32 @@ public class PanierController implements Initializable {
     @FXML
     private void ajouter_panier(ActionEvent event) {
         Panier c = new Panier(nom.getText(),prix.getText());
-        
+        if(nom.getText().length()== 0 && prix.getText().length()==0)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Aucune saisie effectué!");
+            alert.show();
+        }
+        else if(nom.getText().length()==0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Nom Vide");
+            alert.show();
+        }
+        else if(prix.getText().length()==0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Prix Vide");
+            alert.show();
+        }
+        else{
             PanierService cserv= PanierService.getInstance();
             cserv.insert(c);
+        }
          try {
                 Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/panier.fxml"));
                 Scene scene = new Scene(page1);
@@ -184,11 +207,7 @@ public class PanierController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Panier insérée avec succés!");
-        alert.show();*/
+       
         nom.setText("");
         prix.setText("");
     }
@@ -198,14 +217,23 @@ public class PanierController implements Initializable {
     private void supp_panier(ActionEvent event) {
         int id = Integer.parseInt(supp.getText());
             PanierService cserv= PanierService.getInstance();
-           // cserv.delete(id);
+            cserv.delete(id);
+            try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/panier.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
+            }
            
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Element supprimé avec succés!");
         alert.show();
-        supp.setText("");
+        supp.setText("");*/
     }
 
     

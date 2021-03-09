@@ -9,7 +9,7 @@
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
     <jar href="lib\mariadb-java-client-2.4.4.jar" size="592409" download="eager" />
-    <jar href="upgradi.jar" size="551706" download="eager" />
+    <jar href="upgradi.jar" size="554320" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="upgradi" >
     <param name="requiredFXVersion" value="8.0+"/>
