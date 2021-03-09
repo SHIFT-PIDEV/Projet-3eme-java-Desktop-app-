@@ -188,7 +188,8 @@ public class CmdController implements Initializable {
     private void paymentAction(ActionEvent event) {
         PaymentMethod c;
           c = new PaymentMethod(nom.getText(),prenom.getText(),email.getText(),pays.getText(),Integer.parseInt(codepostal.getText()),Integer.parseInt(numcarte.getText()),date.getText(),Integer.parseInt(cvc.getText()));
-            
+           PaymentService cserv= PaymentService.getInstance();
+            cserv.insert(c); 
             try {
                 Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/cmd_details.fxml"));
                 Scene scene = new Scene(page1);
@@ -198,9 +199,6 @@ public class CmdController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
-            PaymentService cserv= PaymentService.getInstance();
-            cserv.insert(c);
     }
 
    

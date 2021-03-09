@@ -16,6 +16,7 @@ import java.util.List;
     public interface Iservice<T>{
     public void insert (T o);
     public void delete(int id);
+    public void deleteAll();
     public List<T> displayAll();
     public T displayById(int id);
    // public boolean update(T os);

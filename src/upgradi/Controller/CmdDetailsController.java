@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,6 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import upgradi.Entities.PaymentMethod;
+import upgradi.Services.PanierService;
 import upgradi.Services.PaymentService;
 
 /**
@@ -168,11 +170,7 @@ public class CmdDetailsController implements Initializable{
             } catch (IOException ex) {
     }
     }
-    @FXML
-    private void Valider(ActionEvent event) {
-    }
-
-    @FXML
+    /*@FXML
     private void actualiser(ActionEvent event) {
         try {
                 Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/cmd_details.fxml"));
@@ -182,6 +180,29 @@ public class CmdDetailsController implements Initializable{
                 stage.show();
             } catch (IOException ex) {
     }
+    }*/
+
+    @FXML
+    private void valider(ActionEvent event) {
+         
+             try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/acceuil.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+                
+          } catch (IOException ex) {
+    }
+            PaymentService cserv= PaymentService.getInstance();
+            cserv.deleteB();
+            PanierService pserv = PanierService.getInstance();
+            pserv.deleteAll();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Commande");
+            alert.setHeaderText(null);
+            alert.setContentText("Commande Validé!");
+            alert.show();
     }
     
 }

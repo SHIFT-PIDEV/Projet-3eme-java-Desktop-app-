@@ -57,9 +57,23 @@ public class PanierService implements Iservice<Panier>{
         
     }
 
-  
+    @Override
     public void delete(int id) {
         String req="delete from panier where id="+id;
+        //Panier p=displayById(id);
+        
+              try {
+           
+            st.executeUpdate(req);
+             
+        } catch (SQLException ex) {
+            Logger.getLogger(PanierService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @Override
+    public void deleteAll() {
+        String req="delete from panier";
         //Panier p=displayById(id);
         
               try {

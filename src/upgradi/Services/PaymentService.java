@@ -64,6 +64,18 @@ public class PaymentService implements IservicePayment<PaymentMethod>{
             Logger.getLogger(PaymentService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @Override
+    public void deleteB() {
+        String req="delete from paymentmethod";
+        
+              try {
+           
+            st.executeUpdate(req);
+             
+        } catch (SQLException ex) {
+            Logger.getLogger(PaymentService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public ObservableList<PaymentMethod> displayAll() {

@@ -52,7 +52,7 @@ public class CmdService implements Iservice<cmd>{
     }
 
     @Override
-    public void delete() {
+    public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -63,6 +63,11 @@ public class CmdService implements Iservice<cmd>{
 
     @Override
     public cmd displayById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
