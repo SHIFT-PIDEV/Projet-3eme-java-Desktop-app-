@@ -185,6 +185,8 @@ public class CoursController implements Initializable {
     private Button trie;
     @FXML
     private TextField searchBar;
+    @FXML
+    private Button btn_pie;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          niveau.setItems(FXCollections.observableArrayList("beginner","advanced","expert"));
@@ -285,6 +287,15 @@ FilteredList<cour> filteredData = new FilteredList<>(listdata.getcour(), b -> tr
 
     @FXML
     private void ajouter_cour(ActionEvent event) throws SQLException, IOException {
+        if (afftable.getItems().isEmpty())
+        {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("aucun saisie");
+        alert.show();
+        }
+        
         Image image1=null;
              image1= imgview.getImage();
              String photo = null;
@@ -295,8 +306,13 @@ FilteredList<cour> filteredData = new FilteredList<>(listdata.getcour(), b -> tr
         
        cour c;
        c = new cour (nomcour.getText(), (String) categorie.getSelectionModel().getSelectedItem(),formateur.getText(),description.getText(),photo,Float.parseFloat(prix.getText()),niveau.getSelectionModel().getSelectedItem(),duration.getText());
+
+       
+           
+       
             courservice cserv= courservice.getInstance();
             cserv.insert(c);
+       
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
@@ -419,6 +435,22 @@ FilteredList<cour> filteredData = new FilteredList<>(listdata.getcour(), b -> tr
              nom_cour.setSortType(TableColumn.SortType.DESCENDING);
         afftable.getSortOrder().add(nom_cour);
         afftable.sort();
+    }
+
+    @FXML
+    private void pie(ActionEvent event) {
+         try {
+                System.out.println("testttttttttttttt");
+                Parent pagePieChart=FXMLLoader.load(getClass().getResource("/upgradi/Views/PieChartView.fxml"));
+                Scene scene=new Scene(pagePieChart);
+                Stage stage=(Stage) ((Node) event.getSource())
+                        .getScene()
+                        .getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(CoursController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
         
     

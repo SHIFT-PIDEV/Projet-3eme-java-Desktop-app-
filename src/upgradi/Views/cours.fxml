@@ -242,13 +242,14 @@
                                     <TableColumn fx:id="duration1" text="duration" />
                                  </columns>
                               </TableView>
-                              <ImageView fx:id="image_view1" fitHeight="150.0" fitWidth="200.0" layoutX="367.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="image_view1" fitHeight="150.0" fitWidth="200.0" layoutX="367.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="btn_supp" layoutX="223.0" layoutY="443.0" mnemonicParsing="false" onAction="#supp_cour" prefHeight="34.0" prefWidth="78.0" text="Supprimer" />
                               <TextField fx:id="t_id" layoutX="54.0" layoutY="447.0" />
                               <Label layoutX="22.0" layoutY="458.0" prefHeight="17.0" prefWidth="42.0" text="ID" />
                               <Button fx:id="trie" layoutX="488.0" layoutY="446.0" mnemonicParsing="false" onAction="#Tri" text="trie" />
                               <TextField fx:id="searchBar" layoutX="188.0" layoutY="29.0" />
                               <Label layoutX="96.0" layoutY="33.0" prefHeight="18.0" prefWidth="68.0" text="recherche" />
+                              <Button fx:id="btn_pie" layoutX="340.0" layoutY="445.0" mnemonicParsing="false" onAction="#pie" prefHeight="31.0" prefWidth="106.0" text="Statistiques" />
                            </children>
                         </AnchorPane>
                      </children>

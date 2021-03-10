@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/3A/upgradi/src/upgradi/Views/ChartGraphique.fxml</file>
+            <file>file:/C:/3A/upgradi/src/upgradi/Controller/ChartGraphiqueController.java</file>
+            <file>file:/C:/3A/upgradi/src/upgradi/Controller/ListData.java</file>
+            <file>file:/C:/3A/upgradi/src/upgradi/Services/courservice.java</file>
+            <file>file:/C:/3A/upgradi/src/upgradi/Entities/cour.java</file>
+            <file>file:/C:/3A/upgradi/src/upgradi/Controller/CoursController.java</file>
+            <file>file:/C:/3A/upgradi/src/upgradi/Controller/PieChartViewController.java</file>
+        </group>
     </open-files>
 </project-private>

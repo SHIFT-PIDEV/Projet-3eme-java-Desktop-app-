@@ -138,11 +138,12 @@ public class cour {
             return false;
         }
         final cour other = (cour) obj;
-        if (this.id != other.id) {
+        if (this.categorie != other.categorie) {
             return false;
         }
         return true;
     }
+    
 
     
 }
