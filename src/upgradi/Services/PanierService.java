@@ -60,7 +60,6 @@ public class PanierService implements Iservice<Panier>{
     @Override
     public void delete(int id) {
         String req="delete from panier where id="+id;
-        //Panier p=displayById(id);
         
               try {
            
@@ -74,9 +73,8 @@ public class PanierService implements Iservice<Panier>{
     @Override
     public void deleteAll() {
         String req="delete from panier";
-        //Panier p=displayById(id);
-        
-              try {
+       
+        try {
            
             st.executeUpdate(req);
              
@@ -127,17 +125,5 @@ public class PanierService implements Iservice<Panier>{
     return a;
         
     }
-
-  /* @Override
-    public boolean update(Panier os) {
-        String req = "UPDATE panier SET nom = '"+os.getNom()+"', prixTotal = '" + os.getPrix()+"' WHERE id = "+os.getId();
-        try {
-            st.executeUpdate(req);
-            System.out.println("test" + st.executeUpdate(req));
-        } catch (SQLException ex) {
-            Logger.getLogger(PanierService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }*/
     
 }

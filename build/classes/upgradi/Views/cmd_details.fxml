@@ -13,14 +13,14 @@
 
 <AnchorPane fx:id="body" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="820.0" styleClass="body" stylesheets="@StyleSheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="upgradi.Controller.CmdDetailsController">
    <children>
-      <TableView fx:id="tablepayment" blendMode="HARD_LIGHT" layoutX="207.0" layoutY="114.0" prefHeight="89.0" prefWidth="607.0" style="-fx-background-color: grey;">
+      <TableView fx:id="tablepayment" layoutX="207.0" layoutY="114.0" prefHeight="55.0" prefWidth="607.0">
         <columns>
           <TableColumn fx:id="nom1" prefWidth="75.0" text="Nom" />
           <TableColumn fx:id="prenom1" prefWidth="75.0" text="Prenom" />
             <TableColumn fx:id="email1" prefWidth="75.0" text="Email" />
             <TableColumn fx:id="pays1" prefWidth="74.0" text="Pays" />
             <TableColumn fx:id="codepostal1" prefWidth="76.0" text="Code Postal" />
-            <TableColumn fx:id="num1" prefWidth="141.0" text="Num Carte" />
+            <TableColumn fx:id="num" prefWidth="141.0" text="Num Carte" />
             <TableColumn fx:id="date1" prefWidth="60.0" text="Date Exp." />
             <TableColumn fx:id="cvv1" prefWidth="29.0" text="CVV" />
         </columns>
@@ -196,7 +196,7 @@
          <font>
             <Font size="30.0" />
          </font></Label>
-      <Button layoutX="229.0" layoutY="265.0" mnemonicParsing="false" onAction="#Modifier" text="Modifier vos informations" />
-      <Button layoutX="678.0" layoutY="265.0" mnemonicParsing="false" onAction="#valider" text="Valider Commande" />
+      <Button layoutX="235.0" layoutY="169.0" mnemonicParsing="false" onAction="#Modifier" text="Modifier vos informations" />
+      <Button layoutX="619.0" layoutY="169.0" mnemonicParsing="false" onAction="#valider" text="Valider Commande" />
    </children>
 </AnchorPane>

@@ -76,7 +76,7 @@ public class PaymentService implements IservicePayment<PaymentMethod>{
             Logger.getLogger(PaymentService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+   
     @Override
     public ObservableList<PaymentMethod> displayAll() {
         String req="select * from paymentmethod";

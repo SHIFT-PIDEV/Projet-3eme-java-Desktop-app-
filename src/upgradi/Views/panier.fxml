@@ -186,16 +186,19 @@
       <TextField fx:id="prix" layoutX="495.0" layoutY="36.0" />
       <Label layoutX="443.0" layoutY="40.0" prefHeight="17.0" prefWidth="103.0" text="Prix :" />
       <Button fx:id="btn_valider" layoutX="677.0" layoutY="36.0" mnemonicParsing="false" onAction="#ajouter_panier" prefHeight="25.0" prefWidth="103.0" text="valider" />
-      <TableView fx:id="tablePanier" layoutX="230.0" layoutY="90.0" prefHeight="378.0" prefWidth="551.0">
+      <TableView fx:id="tablePanier" layoutX="230.0" layoutY="90.0" prefHeight="314.0" prefWidth="551.0">
          <columns>
-            <TableColumn fx:id="id" prefWidth="164.0" text="#" />
-            <TableColumn fx:id="nom1" prefWidth="218.0" text="Nom" />
-            <TableColumn fx:id="prix1" prefWidth="168.0" text="Prix" />
+            <TableColumn fx:id="id" prefWidth="71.0" text="#" />
+            <TableColumn fx:id="nom1" prefWidth="221.0" text="Nom" />
+            <TableColumn fx:id="prix1" prefWidth="258.0" text="Prix" />
          </columns>
       </TableView>
       <Label layoutX="230.0" layoutY="486.0" text="Id" />
       <TextField fx:id="supp" layoutX="259.0" layoutY="482.0" />
       <Button fx:id="btn_delete" layoutX="418.0" layoutY="482.0" mnemonicParsing="false" onAction="#supp_panier" text="Delete" />
-      <Button fx:id="btn_order" layoutX="697.0" layoutY="474.0" mnemonicParsing="false" text="Commandez" />
+      <Button fx:id="btn_order" layoutX="697.0" layoutY="474.0" mnemonicParsing="false" onAction="#commandez" text="Commandez" />
+      <Button layoutX="258.0" layoutY="432.0" mnemonicParsing="false" onAction="#Tri" text="Trier " />
+      <Button fx:id="btn_delete1" layoutX="480.0" layoutY="482.0" mnemonicParsing="false" onAction="#supp_panier_all" text="Delete All" />
+      <TextField fx:id="searchBar" layoutX="440.0" layoutY="541.0" promptText="Search" />
    </children>
 </AnchorPane>

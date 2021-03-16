@@ -19,7 +19,6 @@ import java.util.List;
     public void deleteB();
     public List<T> displayAll();
     public T displayById(int id);
-   // public boolean update(T os);
         
         
     }

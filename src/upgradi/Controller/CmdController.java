@@ -7,7 +7,6 @@ package upgradi.Controller;
 
 import java.io.IOException;
 import java.net.URL;
-import static java.util.Collections.list;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,17 +17,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodEvent;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -133,45 +129,33 @@ public class CmdController implements Initializable {
     private TextField date;
     @FXML
     private TextField cvc;
-   /* @FXML
-    private TableColumn<PaymentMethod, ?> nom1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> prenom1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> email1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> pays1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> codepostal1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> num1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> date1;
-    @FXML
-    private TableColumn<PaymentMethod, ?> cvv1;
-    @FXML
-    private TableView<PaymentMethod> tablepayment;*/
     @FXML
     private Button btn_payez;
-    
+    @FXML
+    private Text rq_nom;
+    @FXML
+    private Text rq_prenom;
+    @FXML
+    private Text rq_email;
+    @FXML
+    private Text rq_pays;
+    @FXML
+    private Text rq_code;
+    @FXML
+    private Text rq_num;
+    @FXML
+    private Text rq_cvc;
+    @FXML
+    private Text rq_date;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-      
-    /* tablepayment.setItems(listdata.getPaymentMethod());
-     nom1.setCellValueFactory(new PropertyValueFactory<>("nom"));
-     prenom1.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-     email1.setCellValueFactory(new PropertyValueFactory<>("email"));
-     pays1.setCellValueFactory(new PropertyValueFactory<>("pays"));
-     codepostal1.setCellValueFactory(new PropertyValueFactory<>("codepostal"));
-     num1.setCellValueFactory(new PropertyValueFactory<>("numcarte"));
-     date1.setCellValueFactory(new PropertyValueFactory<>("datecarte"));
-     cvv1.setCellValueFactory(new PropertyValueFactory<>("cvc"));*/
-    }    
-    
+    }
+
     @FXML
     private void coursClick(MouseEvent event) {
     }
@@ -187,9 +171,128 @@ public class CmdController implements Initializable {
     @FXML
     private void paymentAction(ActionEvent event) {
         PaymentMethod c;
-          c = new PaymentMethod(nom.getText(),prenom.getText(),email.getText(),pays.getText(),Integer.parseInt(codepostal.getText()),Integer.parseInt(numcarte.getText()),date.getText(),Integer.parseInt(cvc.getText()));
-           PaymentService cserv= PaymentService.getInstance();
-            cserv.insert(c); 
+
+        if (nom.getText().length() == 0 && prenom.getText().length() == 0 && email.getText().length() == 0 && pays.getText().length() == 0 && String.valueOf(codepostal.getText()).isEmpty() && String.valueOf(numcarte.getText()).isEmpty() && date.getText().length() == 0 && String.valueOf(cvc.getText()).isEmpty()) {
+
+            rq_nom.setText("*Veuillez Remplir ce champ!");
+            rq_prenom.setText("*Veuillez Remplir ce champ!");
+            rq_email.setText("*Veuillez Remplir ce champ!");
+            rq_pays.setText("*Veuillez Remplir ce champ!");
+            rq_code.setText("*Veuillez Remplir ce champ!");
+            rq_num.setText("*Veuillez Remplir ce champ!");
+            rq_date.setText("*Veuillez Remplir ce champ!");
+            rq_cvc.setText("*Veuillez Remplir ce champ!");
+            //change text colors
+            rq_nom.setStyle("-fx-fill: #ff0f0f ;");
+            rq_prenom.setStyle("-fx-fill: #ff0f0f ;");
+            rq_email.setStyle("-fx-fill: #ff0f0f ;");
+            rq_pays.setStyle("-fx-fill: #ff0f0f ;");
+            rq_code.setStyle("-fx-fill: #ff0f0f ;");
+            rq_num.setStyle("-fx-fill: #ff0f0f ;");
+            rq_date.setStyle("-fx-fill: #ff0f0f ;");
+            rq_cvc.setStyle("-fx-fill: #ff0f0f ;");
+            //change text field color 
+            nom.setStyle("-fx-border-color: #ff0f0f ;");
+            prenom.setStyle("-fx-border-color: #ff0f0f ;");
+            email.setStyle("-fx-border-color: #ff0f0f ;");
+            pays.setStyle("-fx-border-color: #ff0f0f ;");
+            codepostal.setStyle("-fx-border-color: #ff0f0f ;");
+            numcarte.setStyle("-fx-border-color: #ff0f0f ;");
+            date.setStyle("-fx-border-color: #ff0f0f ;");
+            cvc.setStyle("-fx-border-color: #ff0f0f ;");
+        } else if (nom.getText().length() == 0) {
+            rq_nom.setText("*Veuillez Remplir ce champ!");
+            rq_prenom.setText("");
+            rq_email.setText("");
+            rq_pays.setText("");
+            rq_code.setText("");
+            rq_num.setText("");
+            rq_date.setText("");
+            rq_cvc.setText("");
+            rq_nom.setStyle("-fx-fill: #ff0f0f ;");
+            nom.setStyle("-fx-border-color: #ff0f0f ;");
+        }  else if (prenom.getText().length() == 0) {
+            rq_nom.setText("");
+            rq_prenom.setText("*Veuillez Remplir ce champ!");
+            rq_email.setText("");
+            rq_pays.setText("");
+            rq_code.setText("");
+            rq_num.setText("");
+            rq_date.setText("");
+            rq_cvc.setText("");
+            rq_prenom.setStyle("-fx-fill: #ff0f0f ;");
+            prenom.setStyle("-fx-border-color: #ff0f0f ;");
+        } else if (email.getText().length() == 0) {
+            rq_nom.setText("");
+            rq_prenom.setText("");
+            rq_email.setText("*Veuillez Remplir ce champ!");
+            rq_pays.setText("");
+            rq_code.setText("");
+            rq_num.setText("");
+            rq_date.setText("");
+            rq_cvc.setText("");
+            rq_email.setStyle("-fx-fill: #ff0f0f ;");
+            email.setStyle("-fx-border-color: #ff0f0f ;");
+
+        } else if (pays.getText().length() == 0) {
+            rq_nom.setText("");
+            rq_prenom.setText("");
+            rq_email.setText("");
+            rq_pays.setText("*Veuillez Remplir ce champ!");
+            rq_code.setText("");
+            rq_num.setText("");
+            rq_date.setText("");
+            rq_cvc.setText("");
+            rq_pays.setStyle("-fx-fill: #ff0f0f ;");
+            pays.setStyle("-fx-border-color: #ff0f0f ;");
+        } else if (String.valueOf(codepostal.getText()).isEmpty()) {
+            rq_nom.setText("");
+            rq_prenom.setText("");
+            rq_email.setText("");
+            rq_pays.setText("");
+            rq_code.setText("*Veuillez Remplir ce champ!");
+            rq_num.setText("");
+            rq_date.setText("");
+            rq_cvc.setText("");
+            rq_code.setStyle("-fx-fill: #ff0f0f ;");
+            codepostal.setStyle("-fx-border-color: #ff0f0f ;");
+        } else if (String.valueOf(numcarte.getText()).isEmpty()) {
+            rq_nom.setText("");
+            rq_prenom.setText("");
+            rq_email.setText("");
+            rq_pays.setText("");
+            rq_code.setText("");
+            rq_num.setText("*Veuillez Remplir ce champ!");
+            rq_date.setText("");
+            rq_cvc.setText("");
+            rq_num.setStyle("-fx-fill: #ff0f0f ;");
+            numcarte.setStyle("-fx-border-color: #ff0f0f ;");
+        } else if (date.getText().length() == 0) {
+            rq_nom.setText("");
+            rq_prenom.setText("");
+            rq_email.setText("");
+            rq_pays.setText("");
+            rq_code.setText("");
+            rq_num.setText("");
+            rq_date.setText("*Veuillez Remplir ce champ!");
+            rq_cvc.setText("");
+            rq_date.setStyle("-fx-fill: #ff0f0f ;");
+            date.setStyle("-fx-border-color: #ff0f0f ;");
+        } else if (String.valueOf(cvc.getText()).isEmpty()) {
+            rq_nom.setText("");
+            rq_prenom.setText("");
+            rq_email.setText("");
+            rq_pays.setText("");
+            rq_code.setText("");
+            rq_num.setText("");
+            rq_date.setText("");
+            rq_cvc.setText("*Veuillez Remplir ce champ!");
+            rq_cvc.setStyle("-fx-fill: #ff0f0f ;");
+            cvc.setStyle("-fx-border-color: #ff0f0f ;");
+        } else {
+            c = new PaymentMethod(nom.getText(), prenom.getText(), email.getText(), pays.getText(), Integer.parseInt(codepostal.getText()), Integer.parseInt(numcarte.getText()), date.getText(), Integer.parseInt(cvc.getText()));
+            PaymentService cserv = PaymentService.getInstance();
+            cserv.insert(c);
             try {
                 Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/cmd_details.fxml"));
                 Scene scene = new Scene(page1);
@@ -199,10 +302,6 @@ public class CmdController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
     }
-
-   
-
-  
-    
 }

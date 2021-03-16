@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -31,6 +32,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javax.naming.Binding;
 import upgradi.Entities.Panier;
 import upgradi.Services.PanierService;
 
@@ -153,36 +155,21 @@ public class PanierController implements Initializable {
             return true;
         }    
        String lowerCaseFilter = newValue.toLowerCase();
-       if (e.getNom().toLowerCase().contains(lowerCaseFilter) ) {
+        if (e.getNom().toLowerCase().contains(lowerCaseFilter) ) {
             return true; 
         }
-         else  
+        else  
           return false; 
         });
        });
     SortedList<Panier> sortedData = new SortedList<>(filteredData);  
     sortedData.comparatorProperty().bind(tablePanier.comparatorProperty());  
-    tablePanier.setItems(sortedData);    
-     
-       btn_order.setOnAction(event -> {
-
-            try {
-                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/cmd.fxml"));
-                Scene scene = new Scene(page1);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        
+    tablePanier.setItems(sortedData);
     }    
 
     @FXML
     private void acceuilClick(MouseEvent event) {
-    
-
+   
      try {
                 Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/acceuil.fxml"));
                 Scene scene = new Scene(page1);
@@ -197,24 +184,24 @@ public class PanierController implements Initializable {
     @FXML
     private void ajouter_panier(ActionEvent event) {
         Panier c = new Panier(nom.getText(),prix.getText());
-        if(nom.getText().length()== 0 && prix.getText().length()==0)
+        if(nom.getText().length() == 0 && prix.getText().length() == 0)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Information Dialog");
+            alert.setTitle("ERROR");
             alert.setHeaderText(null);
             alert.setContentText("Aucune saisie effectué!");
             alert.show();
         }
-        else if(nom.getText().length()==0){
+        else if(nom.getText().length() == 0){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Information Dialog");
+            alert.setTitle("ERROR");
             alert.setHeaderText(null);
             alert.setContentText("Nom Vide");
             alert.show();
         }
-        else if(prix.getText().length()==0){
+        else if(prix.getText().length() == 0){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Information Dialog");
+            alert.setTitle("ERROR");
             alert.setHeaderText(null);
             alert.setContentText("Prix Vide");
             alert.show();
@@ -254,12 +241,6 @@ public class PanierController implements Initializable {
                 Logger.getLogger(PanierController.class.getName()).log(Level.SEVERE, null, ex);
             }
            
-        /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Element supprimé avec succés!");
-        alert.show();
-        supp.setText("");*/
     }
      @FXML
     private void supp_panier_all(ActionEvent event) {
@@ -276,13 +257,6 @@ public class PanierController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(PanierController.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
-        /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Element supprimé avec succés!");
-        alert.show();
-        supp.setText("");*/
     }
 
     @FXML
@@ -290,6 +264,29 @@ public class PanierController implements Initializable {
         prix1.setSortType(TableColumn.SortType.DESCENDING);
         tablePanier.getSortOrder().add(prix1);
         tablePanier.sort();
+    }
+
+    @FXML
+    private void commandez(ActionEvent event) {
+        
+        if (tablePanier.getItems().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText(null);
+            alert.setContentText("Tableau Vide!");
+            alert.show();
+        }
+        else{
+            try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/cmd.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }
 

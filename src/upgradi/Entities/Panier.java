@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Panier {
     
     
-    private int  id;
+    private int id ;
     private String nom;
     private String prix;
     
@@ -33,7 +33,7 @@ public class Panier {
     }
 
     public int getId() {
-        return id;
+        return id ;
     }
 
     public String getNom() {
@@ -57,31 +57,7 @@ public class Panier {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.id);
-    
-        return hash;
-    }
-
-    @Override
     public String toString() {
         return "Panier{" + "id=" + id + ", nom=" + nom + ", prix=" + prix + '}';
     }
-    
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Panier other = (Panier) obj;
-        return Objects.equals(this.id, other.id);
-    }     
 }

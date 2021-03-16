@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="body" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="820.0" styleClass="body" stylesheets="@StyleSheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="upgradi.Controller.CmdController">
    <children>
@@ -201,6 +202,14 @@
                         <TextField fx:id="date" layoutX="79.0" layoutY="270.0" prefHeight="25.0" prefWidth="149.0" promptText="MM/YY" />
                         <TextField fx:id="cvc" layoutX="273.0" layoutY="270.0" prefHeight="25.0" prefWidth="149.0" promptText="CVC" />
                         <Button fx:id="btn_payez" layoutX="228.0" layoutY="338.0" mnemonicParsing="false" onAction="#paymentAction" style="-fx-background-color: #1fcc33;" text="Payez" textFill="WHITE" />
+                        <Text fx:id="rq_nom" fill="#ff0f0f" layoutX="23.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.13671875" />
+                        <Text fx:id="rq_prenom" layoutX="284.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="197.00000762939453" />
+                        <Text fx:id="rq_email" layoutX="23.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="197.00000762939453" />
+                        <Text fx:id="rq_pays" layoutX="24.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="197.00000762939453" />
+                        <Text fx:id="rq_code" layoutX="332.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.00000762939453" />
+                        <Text fx:id="rq_num" layoutX="24.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="197.00000762939453" />
+                        <Text fx:id="rq_cvc" layoutX="274.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="149.00000762939453" />
+                        <Text fx:id="rq_date" layoutX="80.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="149.00000762939453" />
                      </children>
                   </AnchorPane>
             </content>
