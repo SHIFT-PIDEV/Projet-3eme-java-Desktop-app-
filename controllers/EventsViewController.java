@@ -34,6 +34,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import services.EventS;
+import upgradi.Upgradi;
 
 /**
  * FXML Controller class
@@ -52,21 +53,15 @@ public class EventsViewController implements Initializable {
     private Button createEventBt;
     private Image image;
     @FXML
-    private Button refresh;
-    @FXML
     private TextField searchBar;
     @FXML
-    private ImageView searchIcon;
-    @FXML
     private HBox eventsInEventView;
-    @FXML
-    private Button tri;
     
     private final ListData listdata = new ListData();
     private final List<Event> events = new ArrayList<>();
     private final List<Event> eventsTrier = new ArrayList<>();
     @FXML
-    private Text changerCompte;
+    private Text iconUserDef;
     public void afficherAll(){
         events.addAll(listdata.getEvents());
         int column = 0;
@@ -85,7 +80,7 @@ public class EventsViewController implements Initializable {
                     row++;
                 }
                 
-                 grid.setMinWidth(Region.USE_COMPUTED_SIZE);
+                grid.setMinWidth(Region.USE_COMPUTED_SIZE);
                 grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
                 grid.setMaxWidth(Region.USE_PREF_SIZE);
 
@@ -179,7 +174,7 @@ public class EventsViewController implements Initializable {
     }
        
     @FXML
-    private void refreshPage(ActionEvent event) {
+    private void refreshPage(MouseEvent event) {
         Parent page1 = null;
         try {
             page1= FXMLLoader.load(getClass().getResource("/views/eventsView.fxml"));
@@ -219,13 +214,12 @@ public class EventsViewController implements Initializable {
     }
     
     @FXML
-    private void trierLesEvents(ActionEvent event) {
+    private void trierLesEvents(MouseEvent event) {
         eventsTrier.clear();
         eventsTrier.addAll(listdata.getEvents());
         eventsTrier.sort((o1, o2) -> -(o1.getIdE()-o2.getIdE()));
        
         grid.getChildren().clear();
-        System.out.println("grid size"+grid.getChildren().size());
         int column = 0;
         int row = 1;
         try {
@@ -259,19 +253,13 @@ public class EventsViewController implements Initializable {
     }
 
     @FXML
-    private void changerCompteVersUser(MouseEvent event) {
-        Parent page1 = null;
-        try {
-            page1= FXMLLoader.load(getClass().getResource("/views/frontEventView.fxml"));
-        } catch (IOException ex) {
-            Logger.getLogger(DashbordController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                Scene scene = new Scene(page1);
-                
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
+    private void deconnexion(MouseEvent event) {
+        Upgradi u=new Upgradi();
+        Stage s=(Stage)this.createEventBt.getScene().getWindow();
+        s.close();
+        u.callStart();
     }
+
        
     
 }

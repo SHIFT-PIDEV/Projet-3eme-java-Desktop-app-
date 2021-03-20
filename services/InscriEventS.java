@@ -5,7 +5,6 @@
  */
 package services;
 
-import entities.Event;
 import entities.InscriEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -71,6 +70,29 @@ public class InscriEventS {
             Logger.getLogger(EventS.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+    public InscriEvent displayeByIdClientIdEvent(int idClient,int idEvent){
+        String req="select * from inscrievent where idclient='"+idClient+"'&&idevent='"+idEvent+"'";
+        InscriEvent ie=new InscriEvent();
+        try {
+            rs=st.executeQuery(req);
+            rs.next();
+            ie.setIdinscri(rs.getInt(1));
+        } catch (SQLException ex) {
+           // Logger.getLogger(InscriEventS.class.getName()).log(Level.SEVERE, null, ex);
+           ie.setIdinscri(-1);
+        }
+        return ie;
+    }
+    public void annulerInscri(int idClient,int idEvent){
+        String req="delete from inscrievent where idclient='"+idClient+"'&&idevent='"+idEvent+"'";
+        
+        try {
+            st.executeUpdate(req);
+        } catch (SQLException ex) {
+            Logger.getLogger(InscriEventS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
 }

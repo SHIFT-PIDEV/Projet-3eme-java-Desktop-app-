@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import entities.Client;
 import entities.Event;
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +25,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -34,6 +34,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import services.EventS;
+import upgradi.Upgradi;
 
 /**
  * FXML Controller class
@@ -46,28 +47,52 @@ public class FrontEventViewController implements Initializable {
     private HBox dashbord;
     @FXML
     private HBox eventsInEventView;
-    @FXML
-    private Button tri;
-    @FXML
     private Button refresh;
     @FXML
     private TextField searchBar;
     @FXML
-    private ImageView searchIcon;
-    @FXML
     private ScrollPane scroll;
     @FXML
     private GridPane grid;
-
-     private final ListData listdata = new ListData();
-    private final List<Event> events = new ArrayList<>();
-    private final List<Event> eventsTrier = new ArrayList<>();
     @FXML
     private Button devFormateur;
     @FXML
     private Text iconUserDef;
     
-       public void afficherAll(){
+    private final ListData listdata = new ListData();
+    private final List<Event> events = new ArrayList<>();
+    private final List<Event> eventsTrier = new ArrayList<>();
+    
+    Client c=new Client();
+          public void setNameUser(){
+              this.iconUserDef.setText(this.c.getNom()+" "+this.c.getPrenom());
+          }
+          private void memePage(Object event){
+              FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/frontEventView.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+               FrontEventViewController fev=Loader.getController();
+               fev.c=this.c;
+               fev.setNameUser();
+               fev.afficherAll();
+                Parent p=Loader.getRoot();
+                Stage frontView ;
+                if(event instanceof MouseEvent){
+                    frontView= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
+                }
+                else{
+                    frontView = (Stage) ((Node) ((ActionEvent)event).getSource()).getScene().getWindow();
+                }
+                Scene scene = new Scene(p);
+                frontView.setScene(scene);
+                frontView.show(); 
+          }
+       public void afficherAll(){    
         events.addAll(listdata.getEvents());
         int column = 0;
         int row = 1;
@@ -78,8 +103,9 @@ public class FrontEventViewController implements Initializable {
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 EventForClientController eventController = fxmlLoader.getController();
-                eventController.setData(events.get(i));
-
+                eventController.setData(events.get(i),this.c);
+                eventController.setLikeIconColor();
+                
                 if (column == 1) {
                     column = 0;
                     row++;
@@ -114,10 +140,10 @@ public class FrontEventViewController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/views/eventForClient.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
-
+                
                 EventForClientController eventController = fxmlLoader.getController();
-                eventController.setData(eventsSearch.get(i));
-
+                eventController.setData(eventsSearch.get(i),this.c);
+                eventController.setLikeIconColor();
                 if (column == 1) {
                     column = 0;
                     row++;
@@ -142,10 +168,12 @@ public class FrontEventViewController implements Initializable {
     
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.afficherAll();
+        
     }    
 
     @FXML
@@ -154,27 +182,16 @@ public class FrontEventViewController implements Initializable {
 
     @FXML
     private void eventsView(MouseEvent event) {
-         Parent page1 = null;
-        try {
-            page1= FXMLLoader.load(getClass().getResource("/views/eventsView.fxml"));
-        } catch (IOException ex) {
-            Logger.getLogger(DashbordController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                Scene scene = new Scene(page1);
-                
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
+        this.memePage(event);
     }
 
     @FXML
-    private void trierLesEvents(ActionEvent event) {
+    private void trierLesEvents(MouseEvent event) {
         eventsTrier.clear();
         eventsTrier.addAll(listdata.getEvents());
         eventsTrier.sort((o1, o2) -> -(o1.getIdE()-o2.getIdE()));
        
         grid.getChildren().clear();
-        System.out.println("grid size"+grid.getChildren().size());
         int column = 0;
         int row = 1;
         try {
@@ -184,7 +201,8 @@ public class FrontEventViewController implements Initializable {
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 EventForClientController eventController = fxmlLoader.getController();
-                eventController.setData(eventsTrier.get(i));
+                eventController.setData(eventsTrier.get(i),this.c);
+                eventController.setLikeIconColor();
 
                 if (column == 1) {
                     column = 0;
@@ -208,21 +226,6 @@ public class FrontEventViewController implements Initializable {
     }
 
     @FXML
-    private void refreshPage(ActionEvent event) {
-         Parent page1 = null;
-        try {
-            page1= FXMLLoader.load(getClass().getResource("/views/frontEventView.fxml"));
-        } catch (IOException ex) {
-            Logger.getLogger(DashbordController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                Scene scene = new Scene(page1);
-                
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-    }
-
-    @FXML
     private void recherche(KeyEvent event) {
         this.afficherAfterSearch();
     }
@@ -236,19 +239,20 @@ public class FrontEventViewController implements Initializable {
     private void devenirFormateur(ActionEvent event) {
     }
 
+
     @FXML
-    private void moveToAdmin(MouseEvent event) {
-        Parent page1 = null;
-        try {
-            page1= FXMLLoader.load(getClass().getResource("/views/eventsView.fxml"));
-        } catch (IOException ex) {
-            Logger.getLogger(DashbordController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                Scene scene = new Scene(page1);
-                
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
+    private void deconnecter(MouseEvent event) {
+        
+        Upgradi u=new Upgradi();
+        Stage s=(Stage)this.devFormateur.getScene().getWindow();
+        s.close();
+        u.callStart();
+        
+    }
+
+    @FXML
+    private void refreshPage(MouseEvent event) {
+        this.memePage(event);
     }
     
 }

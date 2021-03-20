@@ -71,10 +71,9 @@ public class EventController implements Initializable {
         dateLabel.setText(event.getDateD().toString());
         desc.setText(event.getDescE());
         heure.setText("De "+event.getHeure()+"H"+" Jusqu'à "+(int)(event.getHeure()+event.getDuree())+"H ");
-        nbrParticip.setText("100");
         Image image = new Image(getClass().getResourceAsStream(event.getImage()));
         eventPic.setImage(image);
-        nbrParticip.setText(String.valueOf(es.displayInscriptions(event.getIdE()).size()));
+        nbrParticip.setText(String.valueOf(es.laListeDesInscription(event.getIdE()).size()));
     }
     
     @FXML
@@ -115,7 +114,7 @@ public class EventController implements Initializable {
     private void lesInscriptions(ActionEvent event) {
         EventS es;
         es=EventS.getEventS();
-        this.event.listInscri=es.displayInscriptions(this.event.getIdE());
+        this.event.listInscri=es.laListeDesInscription(this.event.getIdE());
         
         FXMLLoader loader=new FXMLLoader();
         loader.setLocation(getClass().getResource("/views/inscriList.fxml"));
@@ -128,6 +127,7 @@ public class EventController implements Initializable {
         }
          InscriListController ilc=loader.getController();
                ilc.setText(this.nbrParticip.getText(),this.event.listInscri);
+               ilc.afficher();
         Parent p=loader.getRoot();
                 Stage lesInscrits=new Stage();
                 Scene scene = new Scene(p);

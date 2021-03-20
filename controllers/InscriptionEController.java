@@ -5,13 +5,12 @@
  */
 package controllers;
 
+import entities.Client;
 import entities.Commentaire;
 import entities.InscriEvent;
 import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,7 +20,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javax.mail.Message;
@@ -64,43 +62,36 @@ public class InscriptionEController implements Initializable {
     private int heure;
     private String date;
    
-    @FXML
-    private TextArea commentaieee;
-    
+     
+    public Client c=new Client();
     public void setNameImageEvent(String name,Image image,int idE,String date,int heure){
         this.imageEvent.setImage(image);
         this.nomEvent.setText(name);
         this.idEvent=idE;
         this.date=date;
         this.heure=heure;
+       
+    }
+    public void setInfoUser(){
+        this.idClient.setText(String.valueOf(this.c.getId()));
+        this.nomClient.setText(this.c.getNom());
+        this.prenomClient.setText(this.c.getPrenom());
+        this.adresseM.setText(this.c.getEmail());
     }
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
 
     @FXML
     private void sinscrire(ActionEvent event) throws MessagingException {
-        //ajout d'une inscri
-        InscriEvent ie=new InscriEvent();
-        ie.setIdClient(Integer.parseInt(idClient.getText()));
-        ie.setIdEvent(this.idEvent);
-        InscriEventS ies= InscriEventS.getInscriEvent();
-        ies.insert(ie);
-        
-        //Ajout d'un commentaire
-        Commentaire c=new Commentaire();
-        c.setIdClient(Integer.parseInt(idClient.getText()));
-        c.setIdEvent(this.idEvent);
-        c.setDesc(commentaieee.getText());
-         CommentaireS cs= CommentaireS.getCommentaireS();
-         cs.insert(c);
-         
-        ies.insert(ie);
+        // mailing 
         Properties prop = System.getProperties();
         prop.put("mail.smtp.port", "587");
          prop.put("mail.smtp.auth", true);
@@ -115,13 +106,15 @@ public class InscriptionEController implements Initializable {
         try {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(adresseM.getText()));
         } catch (AddressException ex) {
-           // Logger.getLogger(InscriptionEController.class.getName()).log(Level.SEVERE, null, ex);
+           //Logger.getLogger(InscriptionEController.class.getName()).log(Level.SEVERE, null, ex);
+           Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("adresse mail non valide");
+        alert.show();
         }
 
          message.setSubject(emailsubject);
-
-
-
 
          MimeBodyPart mimeBodyPart = new MimeBodyPart();
          mimeBodyPart.setContent(emailbody, "text/html");
@@ -133,14 +126,20 @@ public class InscriptionEController implements Initializable {
           message.setContent(multipart);
 
            String fromuser ="hamdiskander5@gmail.com";
-           String pass ="skanderhamdi200998*****";
+           String pass ="skanderhamdi200998*";
            String emailhost="smtp.gmail.com";
            Transport transport =newSession.getTransport("smtp");
            transport.connect(emailhost,fromuser,pass);
            transport.sendMessage( message, message.getAllRecipients());
            transport.close();
            
-           
+           //ajout d'une inscri
+        InscriEvent ie=new InscriEvent();
+        ie.setIdClient(Integer.parseInt(idClient.getText()));
+        ie.setIdEvent(this.idEvent);
+        InscriEventS ies= InscriEventS.getInscriEvent();
+        ies.insert(ie);
+       
            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);

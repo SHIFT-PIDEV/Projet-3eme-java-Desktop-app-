@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import entities.Client;
 import entities.Commentaire;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import services.ClientS;
 import services.CommentaireS;
 
 /**
@@ -28,16 +30,20 @@ public class CommController implements Initializable {
     @FXML
     private Text commentaire;
     
-    private Commentaire c;
+    private Commentaire co;
+    private Client client;
      public void setDataComm(Commentaire c) {
-        this.c = c;
+        this.co = c;
         CommentaireS es= CommentaireS.getCommentaireS();
-        
-        userName.setText("User x :");
+        ClientS cs=ClientS.getClientS();
+        this.client=cs.displayClientById(this.co.getIdClient());
+        userName.setText(this.client.getUserName()+" :");
         commentaire.setText(c.getDesc());
     }
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

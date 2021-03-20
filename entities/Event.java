@@ -21,7 +21,7 @@ public class Event {
     private float duree;
     private String descE;
     private String image;
-    public List<InscriEvent> listInscri; 
+    public List<inscriView> listInscri; 
  
     public Event(){
         this.listInscri=new ArrayList<>();

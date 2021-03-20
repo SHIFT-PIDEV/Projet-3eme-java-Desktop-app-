@@ -7,7 +7,7 @@ package services;
 
 import entities.Commentaire;
 import entities.Event;
-import entities.InscriEvent;
+import entities.inscriView;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import utils.DbConnexion;
 
 /**
@@ -103,9 +101,9 @@ public class EventS {
     }
     
     public void deleteEvent(int id){
-        String req="delete from event where idEvent='"+id+"'";
+        String req2="delete from commentaire where idEvent='"+id+"'";
         try {
-            st.executeUpdate(req);
+            st.executeUpdate(req2);
         } catch (SQLException ex) {
             Logger.getLogger(EventS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -115,6 +113,13 @@ public class EventS {
         } catch (SQLException ex) {
             Logger.getLogger(EventS.class.getName()).log(Level.SEVERE, null, ex);
         }
+        String req="delete from event where idEvent='"+id+"'";
+        try {
+            st.executeUpdate(req);
+        } catch (SQLException ex) {
+            Logger.getLogger(EventS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     public void updateEvent(Event e){
         String replace = e.getImage().replace("\\", "/");
@@ -151,27 +156,28 @@ public class EventS {
         return list;
     }
     
-     public List<InscriEvent> displayInscriptions(int idEvent){
-        
-         List<InscriEvent> list= new ArrayList();  
-        String req="select * from inscrievent where idEvent='"+idEvent+"'";
-        try {
+     public List<inscriView> laListeDesInscription(int idEvent){
+         List<inscriView> list = new ArrayList<>();
+         String req="select * from inscriList where idEvent='"+idEvent+"'";
+          try {
             rs=st.executeQuery(req);
             while(rs.next()){
-                InscriEvent ie=new InscriEvent();
-                ie.setIdinscri(rs.getInt(1));
-            ie.setIdClient(rs.getInt(2));
-            ie.setIdEvent(rs.getInt(3));
-            ie.setDateInscri(rs.getTimestamp(4));
-            list.add(ie);
+                inscriView iv=new inscriView();
+                iv.setIdinscri(rs.getInt(1));
+            iv.setIdClient(rs.getInt(2));
+            iv.setIdEvent(rs.getInt(3));
+            iv.setDateInscri(rs.getTimestamp(4));
+            iv.setNomClient(rs.getString(5));
+            iv.setEmailClient(rs.getString(6));
+            list.add(iv);
             }
                 
         } catch (SQLException ex) {
             Logger.getLogger(EventS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return list;
-    }
+         return list;
+         
+     }
       public List<Commentaire> displayComm(int idEvent){
         
          List<Commentaire> list= new ArrayList();  

@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -28,21 +29,26 @@ public class Upgradi extends Application {
     @Override
     public void start(Stage primaryStage) {
          this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Acceuil");
-        System.out.println("OKOKOKOKOKO");
+        this.primaryStage.setTitle("Login");
+        FXMLLoader loader=new FXMLLoader();
+        loader.setLocation(getClass().getResource("/views/login.fxml"));
         try {
-            parentPage = FXMLLoader.load(getClass().getResource("/views/dashbord.fxml"));
+            loader.load();
         } catch (IOException ex) {
-            System.out.println("taahcheeeee");
             Logger.getLogger(Upgradi.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        System.out.println("OKOKOKOKOKO");
-        Scene scene = new Scene(parentPage);
+        this.parentPage=loader.getRoot();
+        Scene scene = new Scene(this.parentPage);
+        this.primaryStage.initStyle(StageStyle.TRANSPARENT);
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
+       
     }
-
+    
+     public  void callStart(){
+         Stage stage = new Stage();
+        this.start(stage);
+     }
     /**
      * @param args the command line arguments
      */

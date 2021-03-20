@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
@@ -15,7 +16,7 @@
 
 <AnchorPane id="AnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="280.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventController">
    <children>
-      <VBox alignment="CENTER" layoutY="-1.0" prefHeight="280.0" prefWidth="320.0" style="-fx-background-color: #D3D3D3;" styleClass="hover-fade" stylesheets="@dashbord.css">
+      <VBox alignment="CENTER" layoutY="-1.0" prefHeight="280.0" prefWidth="320.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 3px;" styleClass="hover-fade" stylesheets="@dashbord.css">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -42,15 +43,15 @@
             <Text fx:id="nameEvent" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Introduction WEB Live" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="34.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/user.jpg" />
-                     </image>
+                  <FontAwesomeIconView fill="#363434" glyphName="USERS" size="25">
                      <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets right="10.0" />
                      </HBox.margin>
-                  </ImageView>
-                  <Text fx:id="nbrParticip" fill="#4a0e0e" strokeType="OUTSIDE" strokeWidth="0.0" text="100" />
+                  </FontAwesomeIconView>
+                  <Text fx:id="nbrParticip" fill="#830303" strokeType="OUTSIDE" strokeWidth="0.0" text="100">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Text>
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

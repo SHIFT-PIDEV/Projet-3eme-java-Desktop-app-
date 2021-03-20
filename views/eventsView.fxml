@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
@@ -17,14 +18,14 @@
    <top>
       <HBox style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" maxWidth="-Infinity" prefWidth="150.0" style="-fx-background-color: #0fbcf9;">
+            <HBox alignment="CENTER" maxWidth="-Infinity" prefWidth="153.0" style="-fx-background-color: #0fbcf9;">
                <children>
-                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="cursor_hand">
-                     <image>
-                        <Image url="@../images/U.png" />
-                     </image>
-                  </ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: white;" styleClass="cursor_hand" text="PGRADI">
+                  <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="32">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </FontAwesomeIconView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: white;" styleClass="cursor_hand" text="UPGRADI">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -43,41 +44,26 @@
                               <Insets left="5.0" right="10.0" />
                            </HBox.margin>
                         </TextField>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="cursor_hand">
-                           <image>
-                              <Image url="@../images/searchIcon.png" />
-                           </image>
-                        </ImageView>
+                        <FontAwesomeIconView fill="#485460" glyphName="SEARCH" size="20" styleClass="cursor_hand" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="cursor_hand">
-                           <image>
-                              <Image url="@../images/notif.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="cursor_hand">
-                           <image>
-                              <Image url="@../images/admin1.png" />
-                           </image>
+                        <FontAwesomeIconView fill="#0fbcf9" glyphName="BELL" size="24" styleClass="cursor_hand">
                            <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
+                              <Insets right="20.0" />
                            </HBox.margin>
-                        </ImageView>
-                        <Text fx:id="changerCompte" onMouseClicked="#changerCompteVersUser" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bolder;" styleClass="cursor_hand" text="Administrateur">
+                        </FontAwesomeIconView>
+                        <FontAwesomeIconView fill="#485460" glyphName="USER" size="24" styleClass="cursor_hand">
                            <HBox.margin>
-                              <Insets right="10.0" />
+                              <Insets left="20.0" right="5.0" />
+                           </HBox.margin>
+                        </FontAwesomeIconView>
+                        <Text fx:id="iconUserDef" fill="#485460" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bolder;" styleClass="cursor_hand" text="Administrateur">
+                           <HBox.margin>
+                              <Insets right="20.0" />
                            </HBox.margin>
                         </Text>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="cursor_hand">
-                           <image>
-                              <Image url="@../images/down.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </ImageView>
                      </children>
                   </HBox>
                </children>
@@ -116,11 +102,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/events.png" />
-                     </image>
-                  </ImageView>
+                  <FontAwesomeIconView fill="#485460" glyphName="CALENDAR" size="15" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" style="&lt;font-style&gt;: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Events">
                      <HBox.margin>
                         <Insets left="10.0" />
@@ -233,17 +215,13 @@
             </HBox>
             <VBox VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER_LEFT" styleClass="hover-border-color">
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#deconnexion" styleClass="hover-border-color">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/settings.png" />
-                           </image>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="&lt;font-style&gt;: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="paramétres">
+                        <FontAwesomeIconView fill="#485460" glyphName="SIGN_OUT" size="14" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="&lt;font-style&gt;: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Déconnexion">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -264,7 +242,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <HBox>
+            <HBox style="-fx-background-color: white; -fx-background-radius: 10px;">
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
@@ -275,27 +253,16 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                      <children>
-                        <Button fx:id="tri" minWidth="44.0" mnemonicParsing="false" onAction="#trierLesEvents" prefHeight="41.0" prefWidth="55.0" style="-fx-background-color: white; -fx-background-radius: 0px; -fx-border-radius: 3px; -fx-border-color: grey;" styleClass="cursor_hand">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/thlist3.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <FontAwesomeIconView fill="#485460" glyphName="REORDER" onMouseClicked="#trierLesEvents" size="24" styleClass="cursor_hand">
                            <HBox.margin>
-                              <Insets right="10.0" />
+                              <Insets right="20.0" />
                            </HBox.margin>
-                        </Button>
-                        <Button fx:id="refresh" layoutX="10.0" layoutY="10.0" minWidth="44.0" mnemonicParsing="false" onAction="#refreshPage" prefHeight="30.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 0px; -fx-border-color: grey; -fx-border-radius: 3px;" styleClass="cursor_hand">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/reload.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        </FontAwesomeIconView>
+                        <FontAwesomeIconView fill="#485460" glyphName="REFRESH" onMouseClicked="#refreshPage" size="24" styleClass="cursor_hand">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </FontAwesomeIconView>
                         <HBox alignment="CENTER">
                            <children>
                               <TextField fx:id="searchBar" onKeyPressed="#recherche" promptText="Search Events" style="-fx-background-color: transparent; -fx-promt-text-fill: #485460;">
@@ -303,14 +270,10 @@
                                     <Insets left="5.0" right="10.0" />
                                  </HBox.margin>
                               </TextField>
-                              <ImageView fx:id="searchIcon" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#searchByNameAndDesc" pickOnBounds="true" preserveRatio="true" styleClass="cursor_hand">
-                                 <image>
-                                    <Image url="@../images/searchIcon.png" />
-                                 </image>
-                              </ImageView>
+                              <FontAwesomeIconView fill="#485460" glyphName="SEARCH" onMouseClicked="#searchByNameAndDesc" size="20" styleClass="cursor_hand" />
                            </children>
                         </HBox>
-                        <Button fx:id="createEventBt" mnemonicParsing="false" onAction="#createEvent" style="-fx-background-color: #0fbcf9; -fx-background-radius: 2px; -fx-text-fill: white; -fx-font-family: Quicksand; -fx-font-weight: bold;" styleClass="cursor_hand" text="create new event">
+                        <Button fx:id="createEventBt" mnemonicParsing="false" onAction="#createEvent" style="-fx-background-color: #0fbcf9; -fx-background-radius: 3px; -fx-text-fill: white; -fx-font-family: Quicksand; -fx-font-weight: bold;" styleClass="cursor_hand" text="create new event">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
@@ -333,7 +296,7 @@
                         </GridPane>
                      </content>
                      <HBox.margin>
-                        <Insets top="5.0" />
+                        <Insets top="10.0" />
                      </HBox.margin>
                   </ScrollPane>
                </children>
