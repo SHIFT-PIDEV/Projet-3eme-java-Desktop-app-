@@ -2,7 +2,6 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -14,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" stylesheets="@dashbord.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FrontEventViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" stylesheets="@dashbord.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MyEventsController">
    <top>
       <HBox style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
@@ -247,13 +246,13 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bolder; -fx-font-size: 0.5cm; -fx-fill: #485460;" text="Events List" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bolder; -fx-font-size: 0.5cm; -fx-fill: #485460;" text="Events List &gt;&gt; My Events" />
                   <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                      <children>
-                        <FontAwesomeIconView fill="#485460" glyphName="REORDER" onMouseClicked="#trierLesEvents" size="24" styleClass="cursor_hand">
+                        <FontAwesomeIconView fx:id="tri" fill="#485460" glyphName="REORDER" onMouseClicked="#trierLesEvents" size="24" styleClass="cursor_hand">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -273,11 +272,6 @@
                               <FontAwesomeIconView fill="#485460" glyphName="SEARCH" onMouseClicked="#searchByNameAndDesc" size="20" styleClass="cursor_hand" />
                            </children>
                         </HBox>
-                        <Button fx:id="devFormateur" mnemonicParsing="false" onAction="#devenirFormateur" style="-fx-background-color: #0fbcf9; -fx-background-radius: 3px; -fx-text-fill: white; -fx-font-family: Quicksand; -fx-font-weight: bold;" styleClass="cursor_hand" text="My Events">
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </Button>
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

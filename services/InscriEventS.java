@@ -5,6 +5,7 @@
  */
 package services;
 
+import entities.Event;
 import entities.InscriEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,13 +24,14 @@ import utils.DbConnexion;
  */
 public class InscriEventS {
     private static InscriEventS instanceInscriEventS;
-    private Statement st;
-    private ResultSet rs;
+    private Statement st,st1;
+    private ResultSet rs,rs1;
     
     private InscriEventS(){
         DbConnexion cnx= DbConnexion.getInstance();
         try {
             st=cnx.getConnection().createStatement();
+            st1=cnx.getConnection().createStatement();
         } catch (SQLException ex) {
             Logger.getLogger(EventS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -92,6 +94,43 @@ public class InscriEventS {
         } catch (SQLException ex) {
             Logger.getLogger(InscriEventS.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+    }
+    public List<Event> displayByIdClient(int idClient){
+        String req="select * from inscrievent where idclient='"+idClient+"' ";
+        
+        List<Event> list=new ArrayList<>();       
+        
+        try {
+            rs=st.executeQuery(req);
+            while(rs.next()){
+                InscriEvent i=new InscriEvent();
+                i.setIdinscri(rs.getInt(1));
+                i.setIdClient(rs.getInt(2));
+                i.setIdEvent(rs.getInt(3));
+                i.setDateInscri(rs.getTimestamp(4));
+                    String req1="select * from event where idEvent='"+i.getIdEvent()+"'";
+                    rs1=st1.executeQuery(req1);
+                    while(rs1.next()){
+                        Event e=new Event();
+                        e.setIdE(rs1.getInt(1));
+                        e.setIdF(rs1.getInt(2));
+                        e.setNomE(rs1.getString(3));
+                        e.setDateD(rs1.getDate(4).toLocalDate());
+                        e.setHeure(rs1.getInt(5));
+                        e.setDuree(rs1.getInt(6));
+                        e.setDescE(rs1.getString(7));
+                        e.setImage(rs1.getString(8));
+                
+                      list.add(e);
+                    
+                    }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(InscriEventS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
         
     }
     
