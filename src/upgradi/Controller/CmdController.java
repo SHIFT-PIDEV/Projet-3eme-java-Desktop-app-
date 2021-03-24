@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -171,7 +173,14 @@ public class CmdController implements Initializable {
     @FXML
     private void paymentAction(ActionEvent event) {
         PaymentMethod c;
-
+        String at = "^[a-zA-Z]+[a-zA-Z0-9\\._-]*[a-zA-Z0-9]@[a-zA-Z]+"
+                        + "[a-zA-Z0-9\\._-]*[a-zA-Z0-9]+\\.[a-zA-Z]{2,4}$";
+        String datee = "^\\d{2}/\\d{2}$";
+        Pattern pattern =  Pattern.compile(at);
+        Matcher controler = pattern.matcher(email.getText());
+        Pattern pattern2 =  Pattern.compile(datee);
+        Matcher controler2 = pattern2.matcher(date.getText());
+        
         if (nom.getText().length() == 0 && prenom.getText().length() == 0 && email.getText().length() == 0 && pays.getText().length() == 0 && String.valueOf(codepostal.getText()).isEmpty() && String.valueOf(numcarte.getText()).isEmpty() && date.getText().length() == 0 && String.valueOf(cvc.getText()).isEmpty()) {
 
             rq_nom.setText("*Veuillez Remplir ce champ!");
@@ -211,7 +220,7 @@ public class CmdController implements Initializable {
             rq_cvc.setText("");
             rq_nom.setStyle("-fx-fill: #ff0f0f ;");
             nom.setStyle("-fx-border-color: #ff0f0f ;");
-        }  else if (prenom.getText().length() == 0) {
+        } else if (prenom.getText().length() == 0) {
             rq_nom.setText("");
             rq_prenom.setText("*Veuillez Remplir ce champ!");
             rq_email.setText("");
@@ -222,7 +231,7 @@ public class CmdController implements Initializable {
             rq_cvc.setText("");
             rq_prenom.setStyle("-fx-fill: #ff0f0f ;");
             prenom.setStyle("-fx-border-color: #ff0f0f ;");
-        } else if (email.getText().length() == 0) {
+        } else if (email.getText().length() == 0 ) {
             rq_nom.setText("");
             rq_prenom.setText("");
             rq_email.setText("*Veuillez Remplir ce champ!");
@@ -233,7 +242,17 @@ public class CmdController implements Initializable {
             rq_cvc.setText("");
             rq_email.setStyle("-fx-fill: #ff0f0f ;");
             email.setStyle("-fx-border-color: #ff0f0f ;");
-
+             } else if (controler.matches() == false ) {
+            rq_nom.setText("");
+            rq_prenom.setText("");
+            rq_email.setText("*Saisie Mail invalide");
+            rq_pays.setText("");
+            rq_code.setText("");
+            rq_num.setText("");
+            rq_date.setText("");
+            rq_cvc.setText("");
+            rq_email.setStyle("-fx-fill: #ff0f0f ;");
+            email.setStyle("-fx-border-color: #ff0f0f ;"); 
         } else if (pays.getText().length() == 0) {
             rq_nom.setText("");
             rq_prenom.setText("");
@@ -267,6 +286,17 @@ public class CmdController implements Initializable {
             rq_cvc.setText("");
             rq_num.setStyle("-fx-fill: #ff0f0f ;");
             numcarte.setStyle("-fx-border-color: #ff0f0f ;");
+            } else if (String.valueOf(numcarte.getText()).length()!=16) {
+            rq_nom.setText("");
+            rq_prenom.setText("");
+            rq_email.setText("");
+            rq_pays.setText("");
+            rq_code.setText("");
+            rq_num.setText("*Carte invalide");
+            rq_date.setText("");
+            rq_cvc.setText("");
+            rq_num.setStyle("-fx-fill: #ff0f0f ;");
+            numcarte.setStyle("-fx-border-color: #ff0f0f ;");
         } else if (date.getText().length() == 0) {
             rq_nom.setText("");
             rq_prenom.setText("");
@@ -275,6 +305,17 @@ public class CmdController implements Initializable {
             rq_code.setText("");
             rq_num.setText("");
             rq_date.setText("*Veuillez Remplir ce champ!");
+            rq_cvc.setText("");
+            rq_date.setStyle("-fx-fill: #ff0f0f ;");
+            date.setStyle("-fx-border-color: #ff0f0f ;");
+            } else if (controler2.matches() == false) {
+            rq_nom.setText("");
+            rq_prenom.setText("");
+            rq_email.setText("");
+            rq_pays.setText("");
+            rq_code.setText("");
+            rq_num.setText("");
+            rq_date.setText("*Date invalide");
             rq_cvc.setText("");
             rq_date.setStyle("-fx-fill: #ff0f0f ;");
             date.setStyle("-fx-border-color: #ff0f0f ;");
@@ -290,7 +331,7 @@ public class CmdController implements Initializable {
             rq_cvc.setStyle("-fx-fill: #ff0f0f ;");
             cvc.setStyle("-fx-border-color: #ff0f0f ;");
         } else {
-            c = new PaymentMethod(nom.getText(), prenom.getText(), email.getText(), pays.getText(), Integer.parseInt(codepostal.getText()), Integer.parseInt(numcarte.getText()), date.getText(), Integer.parseInt(cvc.getText()));
+            c = new PaymentMethod(nom.getText(), prenom.getText(), email.getText(), pays.getText(), Integer.parseInt(codepostal.getText()), (int) Long.parseLong(numcarte.getText()), date.getText(), Integer.parseInt(cvc.getText()));
             PaymentService cserv = PaymentService.getInstance();
             cserv.insert(c);
             try {
