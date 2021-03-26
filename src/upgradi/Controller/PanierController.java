@@ -142,6 +142,9 @@ public class PanierController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -186,7 +189,7 @@ public class PanierController implements Initializable {
 
     @FXML
     private void wishlistClick(MouseEvent event) {
-         try {
+        try {
             Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/wishlist.fxml"));
             Scene scene = new Scene(page1);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -324,8 +327,8 @@ public class PanierController implements Initializable {
         } else {
             PanierService cserv = PanierService.getInstance();
             cserv.insert(c);
-        WishlistService wserv = WishlistService.getInstance();
-        wserv.insert(c);
+            WishlistService wserv = WishlistService.getInstance();
+            wserv.insert(c);
         }
         try {
             Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/wishlist.fxml"));

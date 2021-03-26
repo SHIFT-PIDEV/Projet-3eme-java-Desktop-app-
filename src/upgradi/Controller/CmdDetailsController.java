@@ -154,6 +154,8 @@ public class CmdDetailsController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -246,11 +248,8 @@ public class CmdDetailsController implements Initializable {
                         .setDefaultPaymentMethod("pm_card_visa")
                         .build()
         ).build();
-        PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
-                .setAmount(1000000L)
-                .setCurrency("USD")
-                .build();
-        PaymentIntentConfirmParams confirm = PaymentIntentConfirmParams.builder().setPaymentMethod("pm_card_visa").build();
+        //Customer customer = Customer.retrieve();
+        
         // Mailing Service
         Properties prop = System.getProperties();
         prop.put("mail.smtp.port", "587");
@@ -827,15 +826,26 @@ public class CmdDetailsController implements Initializable {
         transport.sendMessage(message, message.getAllRecipients());
         transport.close();
         try {
-            PaymentIntent token = PaymentIntent.create(params);
+           /* PaymentIntent token = PaymentIntent.create(params);
             System.out.println(token.getId().toString());
-            System.out.println(token.getStatus().toString());
-
-            PaymentIntent conf = PaymentIntent.retrieve(token.getId().toString());
-            PaymentIntent confirmedIntent = conf.confirm(confirm);
+            System.out.println(token.getStatus().toString());*/
+          Customer customer = Customer.create(par);
+           // PaymentIntent conf = PaymentIntent.retrieve(token.getId().toString());
+           // PaymentIntent confirmedIntent = conf.confirm(confirm);
+           PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+                .setAmount(1000000L)
+                .setCurrency("USD")
+                .setCustomer(customer.getId())
+                //.setDescription("Name:" + nom1.getCellData(0).toString() + " " + prenom1.getCellData(0).toString())
+                .build();
+        PaymentIntentConfirmParams confirm = PaymentIntentConfirmParams.builder()
+                .setPaymentMethod("pm_card_visa")
+                .build();
+           PaymentIntent token = PaymentIntent.create(params);
+           PaymentIntent confirmedIntent = token.confirm(confirm);
             System.out.println(confirmedIntent.getId());
             System.out.println(confirmedIntent.getStatus());
-            Customer.create(par);
+            
 
             Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/cmd_valide.fxml"));
             Scene scene = new Scene(page1);

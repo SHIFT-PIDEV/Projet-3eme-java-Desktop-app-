@@ -5,11 +5,6 @@
  */
 package upgradi;
 
-import com.stripe.Stripe;
-import com.stripe.model.*;
-import com.stripe.param.*;
-import com.stripe.net.*;
-import com.stripe.exception.*;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
