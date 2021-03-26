@@ -16,15 +16,17 @@ import upgradi.Services.PaymentService;
  * @author Fedy
  */
 public class ListDataPayment {
-       private ObservableList<PaymentMethod> payment=FXCollections.observableArrayList();
-       
-       public ListDataPayment(){
-           
-        PaymentService cserv=PaymentService.getInstance();
-        payment= cserv.displayAll();
+
+    private ObservableList<PaymentMethod> payment = FXCollections.observableArrayList();
+
+    public ListDataPayment() {
+
+        PaymentService cserv = PaymentService.getInstance();
+        payment = cserv.displayAll();
         System.out.println(payment);
-       }
-        public ObservableList<PaymentMethod> getPaymentMethod(){
+    }
+
+    public ObservableList<PaymentMethod> getPaymentMethod() {
         return payment;
     }
 }

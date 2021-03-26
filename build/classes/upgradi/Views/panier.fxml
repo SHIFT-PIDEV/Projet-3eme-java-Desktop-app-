@@ -143,7 +143,7 @@
                </children>
             </HBox>
             <Separator layoutX="11.0" layoutY="452.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
-            <HBox fx:id="wishlist" layoutX="47.0" layoutY="460.0" prefHeight="25.0" prefWidth="122.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
+            <HBox fx:id="wishlist" layoutX="47.0" layoutY="460.0" onMouseClicked="#wishlistClick" prefHeight="25.0" prefWidth="122.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
                <children>
                   <ImageView fx:id="icon_wishlist" fitHeight="25.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -181,11 +181,14 @@
             <Separator layoutX="12.0" layoutY="531.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
          </children>
       </AnchorPane>
-      <TextField fx:id="nom" layoutX="282.0" layoutY="36.0" />
-      <Label layoutX="230.0" layoutY="40.0" prefHeight="17.0" prefWidth="103.0" text="Nom :" />
-      <TextField fx:id="prix" layoutX="495.0" layoutY="36.0" />
-      <Label layoutX="443.0" layoutY="40.0" prefHeight="17.0" prefWidth="103.0" text="Prix :" />
-      <Button fx:id="btn_valider" layoutX="677.0" layoutY="36.0" mnemonicParsing="false" onAction="#ajouter_panier" prefHeight="25.0" prefWidth="103.0" text="valider" />
+      <TextField fx:id="nom" layoutX="244.0" layoutY="36.0" />
+      <Label layoutX="202.0" layoutY="40.0" prefHeight="17.0" prefWidth="103.0" text="Nom :" />
+      <TextField fx:id="prix" layoutX="436.0" layoutY="36.0" />
+      <Label layoutX="402.0" layoutY="40.0" prefHeight="17.0" prefWidth="103.0" text="Prix :" />
+      <Button fx:id="btn_valider" layoutX="596.0" layoutY="36.0" mnemonicParsing="false" onAction="#ajouter_panier" prefHeight="25.0" prefWidth="103.0" text="Ajouter au panier">
+         <font>
+            <Font size="11.0" />
+         </font></Button>
       <TableView fx:id="tablePanier" layoutX="230.0" layoutY="90.0" prefHeight="314.0" prefWidth="551.0">
          <columns>
             <TableColumn fx:id="id" prefWidth="71.0" text="#" />
@@ -200,5 +203,10 @@
       <Button layoutX="258.0" layoutY="432.0" mnemonicParsing="false" onAction="#Tri" text="Trier " />
       <Button fx:id="btn_delete1" layoutX="480.0" layoutY="482.0" mnemonicParsing="false" onAction="#supp_panier_all" text="Delete All" />
       <TextField fx:id="searchBar" layoutX="440.0" layoutY="541.0" promptText="Search" />
+      <Button fx:id="btn_wishlist" layoutX="706.0" layoutY="36.0" mnemonicParsing="false" onAction="#ajouter_wishlist" prefHeight="25.0" prefWidth="103.0" text="Ajouter au wishlist">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

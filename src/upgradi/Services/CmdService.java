@@ -18,32 +18,33 @@ import upgradi.Utils.connexionBD;
  *
  * @author Fedy
  */
-public class CmdService implements Iservice<cmd>{
+public class CmdService implements Iservice<cmd> {
 
-    private static CmdService  instance;
+    private static CmdService instance;
     private Statement st;
     private ResultSet rs;
-    
-    private CmdService(){
-           connexionBD cs=connexionBD.getInstance();
+
+    private CmdService() {
+        connexionBD cs = connexionBD.getInstance();
         try {
-            st=cs.getCnx().createStatement();
+            st = cs.getCnx().createStatement();
         } catch (SQLException ex) {
             Logger.getLogger(PanierService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public static CmdService getInstance() {
-            if(instance==null) 
-            instance=new CmdService();
+        if (instance == null) {
+            instance = new CmdService();
+        }
         return instance;
-        
+
     }
-    
+
     @Override
     public void insert(cmd o) {
-        String req = " insert into cmd (username,nomcour,cmdDate,paymentMethod) values ('"+o.getUsername()+"','"+o.getNomCour()+"','"+o.getCmdDate()+"','"+o.getPaymentMethod()+"')";
-     
+        String req = " insert into cmd (username,nomcour,cmdDate,paymentMethod) values ('" + o.getUsername() + "','" + o.getNomCour() + "','" + o.getCmdDate() + "','" + o.getPaymentMethod() + "')";
+
         try {
             st.executeUpdate(req);
         } catch (SQLException ex) {
@@ -70,5 +71,5 @@ public class CmdService implements Iservice<cmd>{
     public void deleteAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package upgradi.Services;
+
 import java.util.List;
 
 /**
@@ -11,14 +12,16 @@ import java.util.List;
  * @author Fedy
  * @param <T>
  */
+public interface IservicePayment<T> {
 
-    
-    public interface IservicePayment<T>{
-    public void insert (T o);
+    public void insert(T o);
+
     public void delete();
+
     public void deleteB();
+
     public List<T> displayAll();
+
     public T displayById(int id);
-        
-        
-    }
+
+}

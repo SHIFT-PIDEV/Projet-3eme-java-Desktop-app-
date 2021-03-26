@@ -114,56 +114,71 @@ public class AcceuilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-    }    
+
+    }
 
     @FXML
     private void panierClick(MouseEvent event) {
         try {
-                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/panier.fxml"));
-                Scene scene = new Scene(page1);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/panier.fxml"));
+            Scene scene = new Scene(page1);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void wishlistClick(MouseEvent event) {
+         try {
+            Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/wishlist.fxml"));
+            Scene scene = new Scene(page1);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void coursClick(MouseEvent event) {
         try {
-          Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/cours.fxml"));
-                Scene scene = new Scene(page1);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/cours.fxml"));
+            Scene scene = new Scene(page1);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void examenClick(MouseEvent event) {
         try {
-                Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/examen.fxml"));
-                Scene scene = new Scene(page1);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Parent page1 = FXMLLoader.load(getClass().getResource("/upgradi/Views/examen.fxml"));
+            Scene scene = new Scene(page1);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(AcceuilController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-   @FXML
+    @FXML
     private void darkMode(ActionEvent event) {
         body.setStyle("-fx-background-color:#02020A;");
         label_acceuil.setStyle("-fx-text-fill: lightgrey;");
     }
-     @FXML
+
+    @FXML
     private void lightMode(ActionEvent event) {
         body.setStyle("-fx-background-color:#ffffff;");
         label_acceuil.setStyle("-fx-text-fill: #02020A;");
     }
+
 }

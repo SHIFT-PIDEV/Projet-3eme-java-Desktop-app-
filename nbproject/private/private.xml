@@ -3,21 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Services/IservicePayment.java</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Controller/CmdController.java</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Controller/ListDataPayment.java</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Controller/AcceuilController.java</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Views/cmd_valide.fxml</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Views/cmd.fxml</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Entities/Panier.java</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Services/CmdService.java</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Entities/PaymentMethod.java</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Services/PanierService.java</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Services/PaymentService.java</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Controller/CmdValideController.java</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Views/cmd_success.fxml</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Views/cmd_details.fxml</file>
-            <file>file:/C:/Users/Fedy/Desktop/upgradi/upgradi/src/upgradi/Controller/PanierController.java</file>
+            <file>file:/C:/Users/Fedy/Desktop/upgradi%20final/src/upgradi/upgradi.java</file>
+            <file>file:/C:/Users/Fedy/Desktop/upgradi%20final/pom.xml</file>
         </group>
     </open-files>
 </project-private>

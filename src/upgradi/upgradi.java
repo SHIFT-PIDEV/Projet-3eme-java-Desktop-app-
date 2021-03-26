@@ -5,6 +5,11 @@
  */
 package upgradi;
 
+import com.stripe.Stripe;
+import com.stripe.model.*;
+import com.stripe.param.*;
+import com.stripe.net.*;
+import com.stripe.exception.*;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,15 +22,15 @@ import javafx.stage.Stage;
  * @author Fedy
  */
 public class upgradi extends Application {
-    
+
     private Stage primaryStage;
     private Parent parentPage;
-   
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Upgradi");
-        
+
         parentPage = FXMLLoader.load(getClass().getResource("/upgradi/Views/acceuil.fxml"));
         Scene scene = new Scene(parentPage);
         this.primaryStage.setScene(scene);
@@ -37,6 +42,18 @@ public class upgradi extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        /*Stripe.apiKey = "sk_test_51IUvWkGDv01GvjnlNOkQChbbj5HQVtFKplAjyhw4FrufGbRF3HPwL1cOAFJmvH0b7uRvNgiF7X7onkeHDRwRiPeH00qEINi8FO";
+        CustomerCreateParams par = CustomerCreateParams.builder().build();
+        try {            
+           /* CustomerListParams params = CustomerListParams.builder().build();
+            CustomerCollection customers = Customer.list(params);
+            System.out.println(customers);
+             Customer customer = Customer.create(par);
+            System.out.println(customer);
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }*/
     }
-    
+
 }

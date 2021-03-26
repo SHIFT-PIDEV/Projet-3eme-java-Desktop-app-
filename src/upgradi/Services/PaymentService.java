@@ -20,31 +20,33 @@ import upgradi.Utils.connexionBD;
  *
  * @author Fedy
  */
-public class PaymentService implements IservicePayment<PaymentMethod>{
+public class PaymentService implements IservicePayment<PaymentMethod> {
 
-    private static PaymentService  instance;
+    private static PaymentService instance;
     private Statement st;
     private ResultSet rs;
-    
-    private PaymentService(){
-           connexionBD cs=connexionBD.getInstance();
+
+    private PaymentService() {
+        connexionBD cs = connexionBD.getInstance();
         try {
-            st=cs.getCnx().createStatement();
+            st = cs.getCnx().createStatement();
         } catch (SQLException ex) {
             Logger.getLogger(PaymentService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public static PaymentService getInstance() {
-            if(instance==null) 
-            instance=new PaymentService();
+        if (instance == null) {
+            instance = new PaymentService();
+        }
         return instance;
-        
+
     }
+
     @Override
     public void insert(PaymentMethod o) {
-        String req = " insert into paymentmethod (nom,prenom,email,pays,codepostal,numcarte,cvc,datecarte) values ('"+o.getNom()+"','"+o.getPrenom()+"','"+o.getEmail()+"','"+o.getPays()+"','"+o.getCodepostal()+"','"+o.getNum()+"','"+o.getCvc()+"','"+o.getDatecarte()+"')";
-     
+        String req = " insert into paymentmethod (nom,prenom,email,pays,codepostal,numcarte,cvc,datecarte) values ('" + o.getNom() + "','" + o.getPrenom() + "','" + o.getEmail() + "','" + o.getPays() + "','" + o.getCodepostal() + "','" + o.getNum() + "','" + o.getCvc() + "','" + o.getDatecarte() + "')";
+
         try {
             st.executeUpdate(req);
         } catch (SQLException ex) {
@@ -54,38 +56,39 @@ public class PaymentService implements IservicePayment<PaymentMethod>{
 
     @Override
     public void delete() {
-        String req="delete from paymentmethod";
-        
-              try {
-           
+        String req = "delete from paymentmethod";
+
+        try {
+
             st.executeUpdate(req);
-             
+
         } catch (SQLException ex) {
             Logger.getLogger(PaymentService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @Override
     public void deleteB() {
-        String req="delete from paymentmethod";
-        
-              try {
-           
+        String req = "delete from paymentmethod";
+
+        try {
+
             st.executeUpdate(req);
-             
+
         } catch (SQLException ex) {
             Logger.getLogger(PaymentService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-   
+
     @Override
     public ObservableList<PaymentMethod> displayAll() {
-        String req="select * from paymentmethod";
-        ObservableList<PaymentMethod> list=FXCollections.observableArrayList();       
-        
+        String req = "select * from paymentmethod";
+        ObservableList<PaymentMethod> list = FXCollections.observableArrayList();
+
         try {
-            rs=st.executeQuery(req);
-            while(rs.next()){
-                PaymentMethod a=new PaymentMethod();
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+                PaymentMethod a = new PaymentMethod();
                 a.setId(rs.getInt(1));
                 a.setNom(rs.getString("nom"));
                 a.setPrenom(rs.getString("prenom"));
@@ -95,10 +98,10 @@ public class PaymentService implements IservicePayment<PaymentMethod>{
                 a.setNum(rs.getInt("numcarte"));
                 a.setCvc(rs.getInt("cvc"));
                 a.setDatecarte(rs.getString("datecarte"));
-                
+
                 list.add(a);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(PanierService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,5 +112,5 @@ public class PaymentService implements IservicePayment<PaymentMethod>{
     public PaymentMethod displayById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

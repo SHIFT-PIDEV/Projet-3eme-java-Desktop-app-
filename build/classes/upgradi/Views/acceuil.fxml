@@ -140,7 +140,7 @@
                </children>
             </HBox>
             <Separator layoutX="11.0" layoutY="452.0" opacity="0.15" prefHeight="1.0" prefWidth="175.0" />
-            <HBox fx:id="wishlist" layoutX="47.0" layoutY="460.0" prefHeight="25.0" prefWidth="122.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
+            <HBox fx:id="wishlist" layoutX="47.0" layoutY="460.0" onMouseClicked="#wishlistClick" prefHeight="25.0" prefWidth="122.0" styleClass="sidebar-box" stylesheets="@StyleSheet.css">
                <children>
                   <ImageView fx:id="icon_wishlist" fitHeight="25.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>

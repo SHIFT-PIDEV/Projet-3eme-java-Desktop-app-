@@ -5,6 +5,10 @@
  */
 package upgradi.Controller;
 
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Customer;
+import com.stripe.param.CustomerCreateParams;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -171,16 +175,16 @@ public class CmdController implements Initializable {
     }
 
     @FXML
-    private void paymentAction(ActionEvent event) {
+    private void paymentAction(ActionEvent event) throws StripeException {
         PaymentMethod c;
         String at = "^[a-zA-Z]+[a-zA-Z0-9\\._-]*[a-zA-Z0-9]@[a-zA-Z]+"
-                        + "[a-zA-Z0-9\\._-]*[a-zA-Z0-9]+\\.[a-zA-Z]{2,4}$";
+                + "[a-zA-Z0-9\\._-]*[a-zA-Z0-9]+\\.[a-zA-Z]{2,4}$";
         String datee = "^\\d{2}/\\d{2}$";
-        Pattern pattern =  Pattern.compile(at);
+        Pattern pattern = Pattern.compile(at);
         Matcher controler = pattern.matcher(email.getText());
-        Pattern pattern2 =  Pattern.compile(datee);
+        Pattern pattern2 = Pattern.compile(datee);
         Matcher controler2 = pattern2.matcher(date.getText());
-        
+
         if (nom.getText().length() == 0 && prenom.getText().length() == 0 && email.getText().length() == 0 && pays.getText().length() == 0 && String.valueOf(codepostal.getText()).isEmpty() && String.valueOf(numcarte.getText()).isEmpty() && date.getText().length() == 0 && String.valueOf(cvc.getText()).isEmpty()) {
 
             rq_nom.setText("*Veuillez Remplir ce champ!");
@@ -231,7 +235,7 @@ public class CmdController implements Initializable {
             rq_cvc.setText("");
             rq_prenom.setStyle("-fx-fill: #ff0f0f ;");
             prenom.setStyle("-fx-border-color: #ff0f0f ;");
-        } else if (email.getText().length() == 0 ) {
+        } else if (email.getText().length() == 0) {
             rq_nom.setText("");
             rq_prenom.setText("");
             rq_email.setText("*Veuillez Remplir ce champ!");
@@ -242,7 +246,7 @@ public class CmdController implements Initializable {
             rq_cvc.setText("");
             rq_email.setStyle("-fx-fill: #ff0f0f ;");
             email.setStyle("-fx-border-color: #ff0f0f ;");
-             } else if (controler.matches() == false ) {
+        } else if (controler.matches() == false) {
             rq_nom.setText("");
             rq_prenom.setText("");
             rq_email.setText("*Saisie Mail invalide");
@@ -252,7 +256,7 @@ public class CmdController implements Initializable {
             rq_date.setText("");
             rq_cvc.setText("");
             rq_email.setStyle("-fx-fill: #ff0f0f ;");
-            email.setStyle("-fx-border-color: #ff0f0f ;"); 
+            email.setStyle("-fx-border-color: #ff0f0f ;");
         } else if (pays.getText().length() == 0) {
             rq_nom.setText("");
             rq_prenom.setText("");
@@ -286,7 +290,7 @@ public class CmdController implements Initializable {
             rq_cvc.setText("");
             rq_num.setStyle("-fx-fill: #ff0f0f ;");
             numcarte.setStyle("-fx-border-color: #ff0f0f ;");
-            } else if (String.valueOf(numcarte.getText()).length()!=16) {
+        } else if (String.valueOf(numcarte.getText()).length() != 16) {
             rq_nom.setText("");
             rq_prenom.setText("");
             rq_email.setText("");
@@ -308,7 +312,7 @@ public class CmdController implements Initializable {
             rq_cvc.setText("");
             rq_date.setStyle("-fx-fill: #ff0f0f ;");
             date.setStyle("-fx-border-color: #ff0f0f ;");
-            } else if (controler2.matches() == false) {
+        } else if (controler2.matches() == false) {
             rq_nom.setText("");
             rq_prenom.setText("");
             rq_email.setText("");
