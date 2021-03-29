@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="700.0" stylesheets="@dashbord.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterCouponController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="63.0" fitWidth="78.0" layoutX="63.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/thlarge.png" />
+               </image>
+            </ImageView>
+            <Text fill="#f8f3f3" layoutX="11.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Coupon">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="500.0" prefWidth="592.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="RED" layoutX="112.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue dans l'interface des Coupons :" textAlignment="JUSTIFY" wrappingWidth="471.15673828125">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Label layoutX="152.0" layoutY="127.0" text="Type du coupon:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="152.0" layoutY="192.0" text="Validité du coupon:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tf_typeC" layoutX="318.0" layoutY="124.0" />
+            <TextField fx:id="tf_validiteC" layoutX="318.0" layoutY="189.0" />
+            <Button fx:id="btn_ajouterC" layoutX="320.0" layoutY="243.0" mnemonicParsing="false" onAction="#ajouterCoupon" prefHeight="31.0" prefWidth="79.0" text="Valider" />
+            <Button fx:id="btn_recuperer" layoutX="425.0" layoutY="310.0" mnemonicParsing="false" onAction="#recuperer_coupon" text="recuperer" />
+            <TextField fx:id="tf_recuperer" layoutX="173.0" layoutY="310.0" prefHeight="31.0" prefWidth="227.0" promptText="ID textField" />
+            <Button fx:id="btn_modifier" layoutX="428.0" layoutY="243.0" mnemonicParsing="false" onAction="#modifier_coupon" text="Modifier" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
