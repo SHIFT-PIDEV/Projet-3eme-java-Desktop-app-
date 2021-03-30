@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.Client;
 import entities.Event;
 import java.io.IOException;
@@ -27,12 +28,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import services.ClientS;
 import services.EventS;
 import upgradi.Upgradi;
 
@@ -58,14 +59,26 @@ public class FrontEventViewController implements Initializable {
     private Button devFormateur;
     @FXML
     private Text iconUserDef;
-    
+    @FXML
+    private Text notifNumbre;
+    @FXML
+    private FontAwesomeIconView notif;
     private final ListData listdata = new ListData();
     private final List<Event> events = new ArrayList<>();
     private final List<Event> eventsTrier = new ArrayList<>();
     
     Client c=new Client();
-          public void setNameUser(){
+    
+          public void setNameUserandNotif(){
               this.iconUserDef.setText(this.c.getNom()+" "+this.c.getPrenom());
+              this.notifNumbre.setText(String.valueOf(this.c.getNbrnotif()));
+              
+              if(this.c.getNbrnotif()!=0){
+                  this.notif.setStyle("-fx-fill:red;");
+              }
+              else{
+                  this.notif.setStyle("-fx-fill:#0fbcf9;");
+              }
           }
           private void memePage(Object event){
               FXMLLoader Loader=new FXMLLoader();
@@ -78,7 +91,7 @@ public class FrontEventViewController implements Initializable {
         
                FrontEventViewController fev=Loader.getController();
                fev.c=this.c;
-               fev.setNameUser();
+               fev.setNameUserandNotif();
                fev.afficherAll();
                 Parent p=Loader.getRoot();
                 Stage frontView ;
@@ -130,7 +143,7 @@ public class FrontEventViewController implements Initializable {
     public void afficherAfterSearch(){
          List<Event> eventsSearch=new ArrayList();
           EventS evs=EventS.getEventS();
-          if(!"".equals(searchBar.getText())){
+          if(!" ".equals(searchBar.getText())){
               grid.getChildren().clear();
         eventsSearch= evs.displayAllAfterSearch(searchBar.getText()); 
          int column = 0;
@@ -247,7 +260,7 @@ public class FrontEventViewController implements Initializable {
         
                MyEventsController mec=Loader.getController();
                mec.c=this.c;
-               mec.setNameUser();
+               mec.setNameUserandNotif();
                mec.afficherAll();
                 Parent p=Loader.getRoot();
                 Stage myEvents;
@@ -271,6 +284,33 @@ public class FrontEventViewController implements Initializable {
     @FXML
     private void refreshPage(MouseEvent event) {
         this.memePage(event);
+    }
+
+    @FXML
+    private void toEventShare(MouseEvent event) {
+        //code affichage des eventsShare lenaaaaaaaaaaaaa
+        ClientS cs=ClientS.getClientS();
+        cs.toZeroNotif(this.c.getId());
+        this.c=cs.displayClientById(this.c.getId());
+        
+        FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/myNotifications.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(FrontEventViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+               MyNotificationsController mnc=Loader.getController();
+               mnc.c=this.c;
+               mnc.setNameUserandNotif();
+               mnc.afficherAll();
+                Parent p=Loader.getRoot();
+                Stage s;
+               s= (Stage) ((Node) event.getSource()).getScene().getWindow();
+               Scene scene = new Scene(p);
+                s.setScene(scene);
+                s.show();
     }
     
 }

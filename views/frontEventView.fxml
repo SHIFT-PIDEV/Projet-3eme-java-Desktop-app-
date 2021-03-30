@@ -49,7 +49,8 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                      <children>
-                        <FontAwesomeIconView fill="#0fbcf9" glyphName="BELL" size="24" styleClass="cursor_hand">
+                        <Text fx:id="notifNumbre" fill="GREY" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-fill: #485460;" text="+10" />
+                        <FontAwesomeIconView fx:id="notif" fill="#0fbcf9" glyphName="BELL" onMouseClicked="#toEventShare" size="24" styleClass="cursor_hand">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>

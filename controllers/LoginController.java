@@ -82,7 +82,7 @@ public class LoginController implements Initializable {
         
                FrontEventViewController fev=Loader.getController();
                fev.c=this.client;
-               fev.setNameUser();
+               fev.setNameUserandNotif();
                fev.afficherAll();
                 Parent p=Loader.getRoot();
                 Stage frontView=new Stage();

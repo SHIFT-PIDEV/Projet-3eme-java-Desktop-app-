@@ -16,6 +16,9 @@ public class Client {
     private String userName;
     private String mdp;
     private String email;
+    private int nbrnotif;
+
+    
 
     public Client() {
     }
@@ -76,7 +79,15 @@ public class Client {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public int getNbrnotif() {
+        return nbrnotif;
+    }
 
+    public void setNbrnotif(int nbrnotif) {
+        this.nbrnotif = nbrnotif;
+    }
+    
     @Override
     public String toString() {
         return "Client{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", userName=" + userName + ", mdp=" + mdp + ", email=" + email + '}';

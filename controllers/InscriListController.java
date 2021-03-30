@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -69,6 +71,27 @@ public class InscriListController implements Initializable {
         mailClient.setCellValueFactory(new PropertyValueFactory<>("emailClient"));
         
         tableauInscri.setItems(list);
+        
+        FilteredList<inscriView> filteredData = new FilteredList<>(list, b -> true);  
+ searchInscri.textProperty().addListener((observable, oldValue, newValue) -> {
+ filteredData.setPredicate(e -> {
+    if (newValue == null || newValue.isEmpty()) {
+     return true;
+    }    
+    String lowerCaseFilter = newValue.toLowerCase();
+    
+    if (e.getEmailClient().toLowerCase().contains(lowerCaseFilter) ) {
+     return true; // Filter matches nomEvent
+    } else if (e.getNomClient().toLowerCase().contains(lowerCaseFilter)) {
+     return true; // Filter matches DescriptioEvent
+    }
+         else  
+          return false; 
+   });
+  });  
+  SortedList<inscriView> sortedData = new SortedList<>(filteredData);  
+  sortedData.comparatorProperty().bind(tableauInscri.comparatorProperty());  
+  tableauInscri.setItems(sortedData);    
     }
     /**
      * Initializes the controller class.

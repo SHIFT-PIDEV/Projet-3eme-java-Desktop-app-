@@ -12,7 +12,6 @@ import entities.Commentaire;
 import entities.Event;
 import entities.InscriEvent;
 import entities.Like;
-import entities.Notification;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ import services.NotificationS;
  *
  * @author asus
  */
-public class Eventv2Controller implements Initializable {
+public class NotifEventController implements Initializable {
 
     @FXML
     private Text dateLabel;
@@ -78,8 +77,10 @@ public class Eventv2Controller implements Initializable {
     @FXML
     private GridPane gridComm;
     @FXML
+    private Text friendName;
+    public String friendName2;
+    @FXML
     private Text notifNumber1;
-
     /**
      * Initializes the controller class.
      */
@@ -88,7 +89,6 @@ public class Eventv2Controller implements Initializable {
         // TODO
     }    
     private  List<Commentaire> comms = new ArrayList<>();
-    
     private Event event;
      public Client c;
     public void setData(Event event,Client c) {
@@ -100,9 +100,12 @@ public class Eventv2Controller implements Initializable {
         dateLabel.setText(event.getDateD().toString());
         desc.setText(event.getDescE());
         heure.setText("De "+event.getHeure()+"H"+" Jusqu'à "+(int)(event.getHeure()+event.getDuree())+"H ");
+        nbrParticip.setText("100");
         Image image = new Image(getClass().getResourceAsStream(event.getImage()));
         eventPic.setImage(image);
         nbrParticip.setText(String.valueOf(es.laListeDesInscription(event.getIdE()).size()));
+        //le nom du friend
+        this.friendName.setText("Votre ami "+this.friendName2+" a partagé avec vous cet event");
         //afficher les commentaires
         this.comms=es.displayComm(event.getIdE());
         this.commNumber.setText(String.valueOf(this.comms.size()));
@@ -208,7 +211,6 @@ public class Eventv2Controller implements Initializable {
         else{
             this.likeIcon.setStyle("-fx-fill:red;");
         }
-        
         //nombre des Share update
         NotificationS ns=NotificationS.getInsctance();
         int nbrShare=ns.displayAllbyIdEvent(this.event.getIdE());
@@ -225,7 +227,6 @@ public class Eventv2Controller implements Initializable {
             k.setIdEvent(this.event.getIdE());
             ls.insertLike(k);
             this.likeIcon.setStyle("-fx-fill:red;");
-            
             
         }
         else{
