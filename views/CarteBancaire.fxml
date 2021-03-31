@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@dashbord.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CarteBancaireController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="105.0" fitWidth="141.0" layoutX="45.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/creditcard.png" />
+               </image>
+            </ImageView>
+            <Text fill="#f8f3f3" layoutX="16.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carte Bancaire">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="500.0" prefWidth="592.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="nom" layoutX="71.0" layoutY="67.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="prenom" layoutX="304.0" layoutY="67.0" promptText="Prenom" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="email" layoutX="71.0" layoutY="139.0" prefHeight="27.0" prefWidth="382.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="pays" layoutX="71.0" layoutY="211.0" promptText="Pays" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="codepostal" layoutX="304.0" layoutY="211.0" promptText="Code Postal" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="numcarte" layoutX="71.0" layoutY="278.0" prefHeight="27.0" prefWidth="384.0" promptText="Numero carte" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="date" layoutX="71.0" layoutY="356.0" promptText="MM/YY" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="cvc" layoutX="304.0" layoutY="356.0" promptText="CVV" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="btn_createcour" layoutX="88.0" layoutY="431.0" mnemonicParsing="false" onAction="#paymentAction" prefHeight="50.0" prefWidth="144.0" style="-fx-background-color: #0598ff;" text="Payez" textFill="#fffdfd">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_resetAll" layoutX="273.0" layoutY="431.0" mnemonicParsing="false" onAction="#resretAll" prefHeight="50.0" prefWidth="144.0" style="-fx-background-color: #878585;" text="Reset" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Text fx:id="rq_nom" fill="#ff0f0f" layoutX="71.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="148.13671875" />
+            <Text fx:id="rq_prenom" layoutX="302.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="152.00000762939453" />
+            <Text fx:id="rq_email" layoutX="69.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="197.00000762939453" />
+            <Text fx:id="rq_pays" layoutX="69.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="152.00000762939453" />
+            <Text fx:id="rq_code" layoutX="305.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.00000762939453" />
+            <Text fx:id="rq_num" layoutX="71.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="197.00000762939453" />
+            <Text fx:id="rq_cvc" layoutX="303.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="149.00000762939453" />
+            <Text fx:id="rq_date" layoutX="70.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="149.00000762939453" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
