@@ -80,6 +80,8 @@ public class examenViewcontroller implements Initializable {
     private Button btn_createxamen1;
     @FXML
     private HBox HB_deconnexion;
+    @FXML
+    private HBox HB_coupon;
           
       public void afficherAll(){
         exams.addAll(listedata.getListExam());
@@ -330,6 +332,53 @@ public class examenViewcontroller implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("mail envoyée avec succés! Bravo");
             alert.show();
+    }
+
+    @FXML
+    private void all_cours(MouseEvent event) {
+         Parent page1 = null;
+        try {
+            page1= FXMLLoader.load(getClass().getResource("/views/couradmin.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(DashbordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                Scene scene = new Scene(page1);
+                
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+        
+    }
+
+    @FXML
+    private void all_packs(MouseEvent event) {
+         Parent page1 = null;
+        try {
+            page1= FXMLLoader.load(getClass().getResource("/views/Pack.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(DashbordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                Scene scene = new Scene(page1);
+                
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+    }
+
+    @FXML
+    private void couponBview(MouseEvent event) {
+         Parent page1 = null;
+        try {
+            page1= FXMLLoader.load(getClass().getResource("/views/couponB.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(DashbordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                Scene scene = new Scene(page1);
+                
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+    
     }
         
     

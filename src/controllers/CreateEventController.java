@@ -31,36 +31,27 @@ import services.EventS;
  */
 public class CreateEventController implements Initializable {
 
+    @FXML
     private TextField idf;
+    @FXML
     private TextField nomE;
+    @FXML
     private DatePicker dd;
+    @FXML
     private TextField heure;
+    @FXML
     private TextField duree;
+    @FXML
     private TextArea desc;
+    @FXML
     private TextField picPath;
     private ImageView pic;
     @FXML
-    private TextField tf_titre;
+    private Button btn_choipic;
     @FXML
-    private DatePicker d_date;
+    private Button btn_createEvent;
     @FXML
-    private ChoiceBox<?> s_niveau;
-    @FXML
-    private TextField s_prix;
-    @FXML
-    private TextField tf_support;
-    @FXML
-    private Button btn_modifier;
-    @FXML
-    private TextField tf_rec_mod;
-    @FXML
-    private Button btn_recuperer;
-    @FXML
-    private Text tf_control_saisie;
-    @FXML
-    private Button btn_sendmail;
-    @FXML
-    private Button btn_ajouter;
+    private Button btn_resetAll;
 
     /**
      * Initializes the controller class.
@@ -70,6 +61,7 @@ public class CreateEventController implements Initializable {
         // TODO
     }    
 
+    @FXML
     private void choisirImage(ActionEvent event) {
         JFileChooser chooser=new JFileChooser();
         chooser.showOpenDialog(null);
@@ -77,7 +69,7 @@ public class CreateEventController implements Initializable {
             File f=chooser.getSelectedFile();
         
         String filename=f.getAbsolutePath();
-        String s= "C:\\Users\\asus\\Documents\\NetBeansProjects\\upgradi\\src\\";
+        String s= "D:\\--Etudes--\\3eme\\S2\\PI-DEV\\JAVA\\upgradi skander\\upgradi\\src\\";
         picPath.setText(filename.substring(s.length()-1));
         }
         
@@ -95,6 +87,7 @@ public class CreateEventController implements Initializable {
     public boolean checkHeure(TextField t){
         return Integer.parseInt(t.getText())>=0&&Integer.parseInt(t.getText())<=23;
     }
+    @FXML
     private void createEvent(ActionEvent event) {
          if(idf.getText().isEmpty()||nomE.getText().isEmpty()||heure.getText().isEmpty()||duree.getText().isEmpty()
                  ||(!isInt(idf))||(!isInt(heure))||(!isInt(duree))||(!checkHeure(heure))||dd.getValue()==null)
@@ -157,6 +150,7 @@ public class CreateEventController implements Initializable {
        
     }
 
+    @FXML
     private void resretAll(ActionEvent event) {
         idf.setText("");
         nomE.setText("");
@@ -168,20 +162,5 @@ public class CreateEventController implements Initializable {
         
     }
 
-    @FXML
-    private void Modifier_exam(ActionEvent event) {
-    }
-
-    @FXML
-    private void recuperer_exam(ActionEvent event) {
-    }
-
-    @FXML
-    private void send_mail(ActionEvent event) {
-    }
-
-    @FXML
-    private void ajouterExamen(ActionEvent event) {
-    }
     
 }

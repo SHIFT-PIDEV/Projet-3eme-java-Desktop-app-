@@ -8,6 +8,7 @@ package controllers;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.Client;
 import entities.Event;
+import entities.Notification;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,13 +30,16 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import services.ClientS;
+import services.EventS;
 import services.InscriEventS;
+import services.NotificationS;
 import upgradi.Upgradi;
 
 /**
@@ -43,7 +47,7 @@ import upgradi.Upgradi;
  *
  * @author asus
  */
-public class MyEventsController implements Initializable {
+public class MyNotificationsController implements Initializable {
 
     @FXML
     private HBox dashbord;
@@ -59,17 +63,16 @@ public class MyEventsController implements Initializable {
     
     @FXML
     private Text iconUserDef;
-    
     @FXML
     private Text notifNumbre;
     @FXML
     private FontAwesomeIconView notif;
-    private final List<Event> events = new ArrayList<>();
-    
-    
-    Client c=new Client();
     @FXML
     private FontAwesomeIconView ref;
+    private final List<Event> events = new ArrayList<>();
+    
+    Client c=new Client();
+    
     
           public void setNameUserandNotif(){
               this.iconUserDef.setText(this.c.getNom()+" "+this.c.getPrenom());
@@ -86,46 +89,55 @@ public class MyEventsController implements Initializable {
           
     private void memePage(Object event){
               FXMLLoader Loader=new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/views/myEvents.fxml"));
+        Loader.setLocation(getClass().getResource("/views/myNotifications.fxml"));
         try {
             Loader.load();  
         } catch (IOException ex) {
-            Logger.getLogger(MyEventsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyNotificationsController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-               MyEventsController mec=Loader.getController();
-               mec.c=this.c;
-               mec.setNameUserandNotif();
-               mec.afficherAll();
+               MyNotificationsController mnc=Loader.getController();
+               mnc.c=this.c;
+               mnc.setNameUserandNotif();
+               mnc.afficherAll();
                 Parent p=Loader.getRoot();
-                Stage frontView ;
+                Stage s ;
                 if(event instanceof MouseEvent){
-                    frontView= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
+                    s= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
                 }
                 else{
-                    frontView = (Stage) ((Node) ((ActionEvent)event).getSource()).getScene().getWindow();
+                    s = (Stage) ((Node) ((ActionEvent)event).getSource()).getScene().getWindow();
                 }
                 Scene scene = new Scene(p);
-                frontView.setScene(scene);
-                frontView.show(); 
+                s.setScene(scene);
+                s.show(); 
           }
        public void afficherAll(){  
-           InscriEventS ies= InscriEventS.getInscriEvent();
+           NotificationS ns= NotificationS.getInsctance();
            List<Event> list=new ArrayList<>(); 
-           list=ies.displayByIdClient(this.c.getId());
+           List<Notification> notList=new ArrayList();
+           list=ns.displayByIdClientSource(this.c.getId());
+           notList=ns.displayNotifByIdClientSource(this.c.getId());
+           System.out.println("aaa"+notList.size());
         events.addAll(list);
         int column = 0;
         int row = 1;
         try {
             for (int i = 0; i <events.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/views/eventv2.fxml"));
-                HBox hbox = fxmlLoader.load();
+                fxmlLoader.setLocation(getClass().getResource("/views/notifEvent.fxml"));
+                AnchorPane ap = fxmlLoader.load();
 
-                Eventv2Controller eventController = fxmlLoader.getController();
-                eventController.setData(events.get(i),this.c);
-                eventController.setLikeIconColor();
+                NotifEventController nec = fxmlLoader.getController();
+                if(!notList.isEmpty()){
+                    ClientS cs=ClientS.getClientS();
+                    Client cli=new Client();
+                    cli=cs.displayClientById(notList.get(i).getIdcS());
+                    nec.friendName2=cli.getUserName();
+                }
                 
+                nec.setData(events.get(i),this.c);
+                nec.setLikeIconColor();
                 if (column == 1) {
                     column = 0;
                     row++;
@@ -139,8 +151,8 @@ public class MyEventsController implements Initializable {
                 grid.setMinHeight(Region.USE_COMPUTED_SIZE);
                 grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
                 grid.setMaxHeight(Region.USE_PREF_SIZE);
-                grid.add(hbox, column++, row); 
-                GridPane.setMargin(hbox, new Insets(10));
+                grid.add(ap, column++, row); 
+                GridPane.setMargin(ap, new Insets(10));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -148,28 +160,34 @@ public class MyEventsController implements Initializable {
     }
     
     public void afficherAfterSearch(){
-        
-        InscriEventS ies= InscriEventS.getInscriEvent();
+         NotificationS ns= NotificationS.getInsctance();
            List<Event> list=new ArrayList<>(); 
-           list=ies.displayByIdClient(this.c.getId());
+           List<Notification> notList=new ArrayList();
+           list=ns.displayByIdClientSource(this.c.getId());
+           notList=ns.displayNotifByIdClientSource(this.c.getId());
          List<Event> eventsSearch = new ArrayList<>();
-         
           if(!" ".equals(searchBar.getText())){
-            eventsSearch= list.stream().
+              eventsSearch= list.stream().
                     filter(t->t.getNomE().toLowerCase().contains(searchBar.getText().toLowerCase()))
                     .collect(Collectors.toList());
-            grid.getChildren().clear();
+              grid.getChildren().clear();
          int column = 0;
         int row = 1;
         try {
             for (int i = 0; i <eventsSearch.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/views/eventv2.fxml"));
-                HBox hbox = fxmlLoader.load();
+                fxmlLoader.setLocation(getClass().getResource("/views/notifEvent.fxml"));
+                AnchorPane a = fxmlLoader.load();
                 
-                Eventv2Controller eventController = fxmlLoader.getController();
-                eventController.setData(eventsSearch.get(i),this.c);
-                eventController.setLikeIconColor();
+                NotifEventController nec = fxmlLoader.getController();
+                if(!notList.isEmpty()){
+                    ClientS cs=ClientS.getClientS();
+                    Client cli=new Client();
+                    cli=cs.displayClientById(notList.get(i).getIdcS());
+                    nec.friendName2=cli.getUserName();
+                }
+                nec.setData(eventsSearch.get(i),this.c);
+                nec.setLikeIconColor();
                 if (column == 1) {
                     column = 0;
                     row++;
@@ -183,8 +201,8 @@ public class MyEventsController implements Initializable {
                 grid.setMinHeight(Region.USE_COMPUTED_SIZE);
                 grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
                 grid.setMaxHeight(Region.USE_PREF_SIZE);
-                grid.add(hbox, column++, row); 
-                GridPane.setMargin(hbox, new Insets(10));
+                grid.add(a, column++, row); 
+                GridPane.setMargin(a, new Insets(10));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -213,7 +231,7 @@ public class MyEventsController implements Initializable {
         try {
             Loader.load();  
         } catch (IOException ex) {
-            Logger.getLogger(MyEventsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
                FrontEventViewController fev=Loader.getController();
@@ -221,12 +239,14 @@ public class MyEventsController implements Initializable {
                fev.setNameUserandNotif();
                fev.afficherAll();
                 Parent p=Loader.getRoot();
-                Stage s ;
-                    s= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
+                Stage frontView ;
+                    frontView= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
                 Scene scene = new Scene(p);
-                s.setScene(scene);
-                s.show(); 
+                frontView.setScene(scene);
+                frontView.show(); 
     }
+
+  
 
     @FXML
     private void recherche(KeyEvent event) {
@@ -257,28 +277,7 @@ public class MyEventsController implements Initializable {
 
     @FXML
     private void toEventShare(MouseEvent event) {
-         ClientS cs=ClientS.getClientS();
-        cs.toZeroNotif(this.c.getId());
-        this.c=cs.displayClientById(this.c.getId());
-        
-        FXMLLoader Loader=new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/views/myNotifications.fxml"));
-        try {
-            Loader.load();  
-        } catch (IOException ex) {
-            Logger.getLogger(MyEventsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-               MyNotificationsController mnc=Loader.getController();
-               mnc.c=this.c;
-               mnc.setNameUserandNotif();
-               mnc.afficherAll();
-                Parent p=Loader.getRoot();
-                Stage s;
-               s= (Stage) ((Node) event.getSource()).getScene().getWindow();
-               Scene scene = new Scene(p);
-                s.setScene(scene);
-                s.show();
+        this.memePage(event);
     }
     
 }

@@ -105,7 +105,7 @@ public class EventsViewController implements Initializable {
     public void afficherAfterSearch(){
          List<Event> eventsSearch=new ArrayList();
           EventS evs=EventS.getEventS();
-          if(!"".equals(searchBar.getText())){
+          if(!" ".equals(searchBar.getText())){
               grid.getChildren().clear();
         eventsSearch= evs.displayAllAfterSearch(searchBar.getText()); 
          int column = 0;
@@ -195,7 +195,7 @@ public class EventsViewController implements Initializable {
     }
     @FXML
     private void eventsView(MouseEvent event) {
-        Parent page1 = null;
+          Parent page1 = null;
         try {
             page1= FXMLLoader.load(getClass().getResource("/views/eventsView.fxml"));
         } catch (IOException ex) {
@@ -297,6 +297,69 @@ public class EventsViewController implements Initializable {
                 stage.show();
         
     }
+
+    @FXML
+    private void all_cours(MouseEvent event) {
+        Parent page1 = null;
+        try {
+            page1= FXMLLoader.load(getClass().getResource("/views/couradmin.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(DashbordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                Scene scene = new Scene(page1);
+                
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+    }
+
+    @FXML
+    private void all_packs(MouseEvent event) {
+         Parent page1 = null;
+        try {
+            page1= FXMLLoader.load(getClass().getResource("/views/Pack.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(DashbordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                Scene scene = new Scene(page1);
+                
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+    }
+
+    @FXML
+    private void reclamationBack(MouseEvent event) {
+         Parent page1 = null;
+        try {
+            page1= FXMLLoader.load(getClass().getResource("/views/Reclamation1.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(DashbordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                Scene scene = new Scene(page1);
+                
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+    }
+
+    @FXML
+    private void demandeBack(MouseEvent event) {
+         Parent page1 = null;
+        try {
+            page1= FXMLLoader.load(getClass().getResource("/views/Demande1.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(DashbordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                Scene scene = new Scene(page1);
+                
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+    }
+
+   
+
 
        
     

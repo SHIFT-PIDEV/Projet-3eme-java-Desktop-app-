@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.Client;
 import entities.Event;
 import java.io.IOException;
@@ -27,37 +28,42 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import services.ClientS;
 import services.EventS;
 import upgradi.Upgradi;
 
 /**
  * FXML Controller class
  *
- * @author asus
+ * @author mahdi
  */
 public class FrontEventViewController implements Initializable {
 
     @FXML
+    private Text notifNumbre;
+    
+    @FXML
+    private FontAwesomeIconView notif;
+    @FXML
+    private Text iconUserDef;
+    @FXML
     private HBox dashbord;
     @FXML
     private HBox eventsInEventView;
-    private Button refresh;
     @FXML
     private TextField searchBar;
+    @FXML
+    private Button devFormateur;
     @FXML
     private ScrollPane scroll;
     @FXML
     private GridPane grid;
-    @FXML
-    private Button devFormateur;
-    @FXML
-    private Text iconUserDef;
+    
     
     private final ListData listdata = new ListData();
     private final List<Event> events = new ArrayList<>();
@@ -66,8 +72,19 @@ public class FrontEventViewController implements Initializable {
     Client c=new Client();
     @FXML
     private HBox HB_examen;
-          public void setNameUser(){
+    @FXML
+    private HBox courV;
+    
+          public void setNameUserandNotif(){
               this.iconUserDef.setText(this.c.getNom()+" "+this.c.getPrenom());
+              this.notifNumbre.setText(String.valueOf(this.c.getNbrnotif()));
+              
+              if(this.c.getNbrnotif()!=0){
+                  this.notif.setStyle("-fx-fill:red;");
+              }
+              else{
+                  this.notif.setStyle("-fx-fill:#0fbcf9;");
+              }
           }
           private void memePage(Object event){
               FXMLLoader Loader=new FXMLLoader();
@@ -80,7 +97,7 @@ public class FrontEventViewController implements Initializable {
         
                FrontEventViewController fev=Loader.getController();
                fev.c=this.c;
-               fev.setNameUser();
+               fev.setNameUserandNotif();
                fev.afficherAll();
                 Parent p=Loader.getRoot();
                 Stage frontView ;
@@ -132,7 +149,7 @@ public class FrontEventViewController implements Initializable {
     public void afficherAfterSearch(){
          List<Event> eventsSearch=new ArrayList();
           EventS evs=EventS.getEventS();
-          if(!"".equals(searchBar.getText())){
+          if(!" ".equals(searchBar.getText())){
               grid.getChildren().clear();
         eventsSearch= evs.displayAllAfterSearch(searchBar.getText()); 
          int column = 0;
@@ -249,7 +266,7 @@ public class FrontEventViewController implements Initializable {
         
                MyEventsController mec=Loader.getController();
                mec.c=this.c;
-               mec.setNameUser();
+               mec.setNameUserandNotif();
                mec.afficherAll();
                 Parent p=Loader.getRoot();
                 Stage myEvents;
@@ -276,8 +293,34 @@ public class FrontEventViewController implements Initializable {
     }
 
     @FXML
-    private void examenviewFront(MouseEvent event) {
+    private void toEventShare(MouseEvent event) {
+        //code affichage des eventsShare lenaaaaaaaaaaaaa
+        ClientS cs=ClientS.getClientS();
+        cs.toZeroNotif(this.c.getId());
+        this.c=cs.displayClientById(this.c.getId());
         
+        FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/myNotifications.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(FrontEventViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+               MyNotificationsController mnc=Loader.getController();
+               mnc.c=this.c;
+               mnc.setNameUserandNotif();
+               mnc.afficherAll();
+                Parent p=Loader.getRoot();
+                Stage s;
+               s= (Stage) ((Node) event.getSource()).getScene().getWindow();
+               Scene scene = new Scene(p);
+                s.setScene(scene);
+                s.show();
+    }
+
+    @FXML
+    private void examenview(MouseEvent event) {
           FXMLLoader Loader=new FXMLLoader();
         Loader.setLocation(getClass().getResource("/views/examenview_Front.fxml"));
         try {
@@ -292,13 +335,112 @@ public class FrontEventViewController implements Initializable {
                fev.afficherAll();
                 Parent p=Loader.getRoot();
                 Stage frontView ;
+               
                     frontView= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
+                
+               
                 Scene scene = new Scene(p);
                 frontView.setScene(scene);
                 frontView.show(); 
+    }
+
+    @FXML
+    private void courview(MouseEvent event) {
+      
+  FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/Frontcourview.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+              FrontcourviewController fev=Loader.getController();
+               fev.c=this.c;
+               fev.setNameUser();
+               fev.afficherAll();
+                Parent p=Loader.getRoot();
+                Stage frontView ;
+               
+                    frontView= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
                 
-              
-             
+               
+                Scene scene = new Scene(p);
+                frontView.setScene(scene);
+                frontView.show(); 
+ }
+
+    @FXML
+    private void all_packet(MouseEvent event) {
+          FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/packagefront.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+               PackagefrontController fev=Loader.getController();
+               fev.c=this.c;
+               fev.setNameUser();
+               fev.afficherAll();
+                Parent p=Loader.getRoot();
+                Stage frontView ;
+               
+                    frontView= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
+                
+               
+                Scene scene = new Scene(p);
+                frontView.setScene(scene);
+                frontView.show(); 
+    }
+     @FXML
+    private void all_Reclam(MouseEvent event) {
+          FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/Reclamation2.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+               ReclamationController fev=Loader.getController();
+               fev.c=this.c;
+               fev.setNameUser();
+               //fev.afficherAll();
+                Parent p=Loader.getRoot();
+                Stage frontView ;
+               
+                    frontView= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
+                
+               
+                Scene scene = new Scene(p);
+                frontView.setScene(scene);
+                frontView.show(); 
+    }
+     @FXML
+    private void all_demande(MouseEvent event) {
+          FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/Demande2.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+               DemandeController fev=Loader.getController();
+               fev.c=this.c;
+               fev.setNameUser();
+               //fev.afficherAll();
+                Parent p=Loader.getRoot();
+                Stage frontView ;
+               
+                    frontView= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
+                
+               
+                Scene scene = new Scene(p);
+                frontView.setScene(scene);
+                frontView.show(); 
     }
     
 }

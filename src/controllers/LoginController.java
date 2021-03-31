@@ -118,7 +118,7 @@ public class LoginController implements Initializable {
         ClientS cs = ClientS.getClientS();
         this.client=cs.displayefoLogin(this.username.getText(), this.password.getText());
         
-       if(this.client.getId()!=-1&&tf_code_ca.getText().equals(label_code_ca.getText()) ){
+       if(this.client.getId()!=-1&&tf_code_ca.getText().equals(label_code_ca.getText())&&this.client.getFormateur()==0 ){
            
             FXMLLoader Loader=new FXMLLoader();
         Loader.setLocation(getClass().getResource("/views/frontEventView.fxml"));
@@ -130,7 +130,7 @@ public class LoginController implements Initializable {
         
                FrontEventViewController fev=Loader.getController();
                fev.c=this.client;
-               fev.setNameUser();
+               fev.setNameUserandNotif();
                fev.afficherAll();
                 Parent p=Loader.getRoot();
                 Stage frontView=new Stage();
@@ -139,6 +139,30 @@ public class LoginController implements Initializable {
                 Stage s=(Stage)this.btn_login.getScene().getWindow();
                 s.close();
                 frontView.show();
+       }
+       else if (this.client.getId()!=-1 &&tf_code_ca.getText().equals(label_code_ca.getText())&& this.client.getFormateur()==1){
+           FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/Ajoutercoursformateur.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+           AjoutercoursformateurController fev=Loader.getController();
+              fev.c=this.client;
+             fev.setNameUser();
+             fev.afficherAll();
+                Parent p=Loader.getRoot();
+                Stage frontView=new Stage();
+                Scene scene = new Scene(p);
+                frontView.setScene(scene);
+                Stage s=(Stage)this.btn_login.getScene().getWindow();
+                s.close();
+                frontView.show();
+           
+           
+           
        }
        else if(this.username.getText().equals("admin")==true&&this.password.getText().equals("admin")==true&&tf_code_ca.getText().equals(label_code_ca.getText()) ){
            FXMLLoader Loader=new FXMLLoader();

@@ -204,7 +204,7 @@ public class MyExamsController implements Initializable {
         
                FrontEventViewController fev=Loader.getController();
                fev.c=this.c;
-               fev.setNameUser();
+               fev.setNameUserandNotif();
                fev.afficherAll();
                 Parent p=Loader.getRoot();
                 Stage frontView ;
