@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane id="AnchorPane" prefHeight="265.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ajouter_coupon_controller">
+   <children>
+      <Rectangle fx:id="forme_coupon" arcHeight="5.0" arcWidth="5.0" fill="#b2c3d3" height="200.0" layoutX="14.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="574.0" />
+      <Label layoutX="23.0" layoutY="43.0" prefHeight="17.0" prefWidth="95.0" text="Id client:" />
+      <Label layoutX="29.0" layoutY="202.0" text="Validité:" />
+      <Label layoutX="474.0" layoutY="43.0" text="Id coupon:" />
+      <Label fx:id="recup_idClient" layoutX="72.0" layoutY="43.0" prefHeight="17.0" prefWidth="43.0" />
+      <Label fx:id="recup_validité" layoutX="72.0" layoutY="202.0" prefHeight="17.0" prefWidth="95.0" />
+      <Label fx:id="recup_idCoupon" layoutX="531.0" layoutY="43.0" prefHeight="17.0" prefWidth="43.0" />
+   </children>
+</AnchorPane>
