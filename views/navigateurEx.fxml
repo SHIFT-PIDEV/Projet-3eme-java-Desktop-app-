@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane fx:id="all_page" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1168.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NavigateurExController">
+   <children>
+      <BorderPane prefHeight="650.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="127.0" prefWidth="1168.0" style="-fx-background-color: #05071E;">
+               <children>
+                  <ImageView fx:id="icon_google" fitHeight="30.0" fitWidth="29.0" layoutX="238.0" layoutY="36.0" onMouseClicked="#to_google" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/google.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="icon_youtube" fitHeight="40.0" fitWidth="44.0" layoutX="935.0" layoutY="31.0" onMouseClicked="#to_youtube" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/youtube.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="icon_facebook" fitHeight="34.0" fitWidth="47.0" layoutX="798.0" layoutY="34.0" onMouseClicked="#to_facebook" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/facebook.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="icon_quiz" fitHeight="32.0" fitWidth="31.0" layoutX="665.0" layoutY="35.0" onMouseClicked="#to_quiz" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/quiz.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="icon_meet" fitHeight="32.0" fitWidth="38.0" layoutX="378.0" layoutY="36.0" onMouseClicked="#to_meet" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/meet.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="icon_classroom" fitHeight="39.0" fitWidth="44.0" layoutX="515.0" layoutY="32.0" onMouseClicked="#to_classroom" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/classroom.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="58.0" fitWidth="88.0" layoutX="14.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/U.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="71.0" layoutY="49.0" style="-fx-background-color: #0fbcf9;" text="PGRADI" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold Italic" size="26.0" />
+                     </font>
+                  </Label>
+                  <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="1028.0" layoutY="59.0" size="24" styleClass="cursor_hand" AnchorPane.rightAnchor="121.14285659790039" />
+                  <Text fx:id="iconUserDef" fill="WHITE" layoutX="1070.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bolder;" styleClass="cursor_hand" text="Simple User" AnchorPane.rightAnchor="14.240234375" />
+                  <Label fx:id="labelchrono" layoutX="587.0" layoutY="88.0" text="00:00:00" textFill="WHITE">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="416.0" layoutY="84.0" prefHeight="30.0" prefWidth="162.0" text="Il vous reste :" textFill="WHITE">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="butn_startchrono" layoutX="716.0" layoutY="93.0" mnemonicParsing="false" onAction="#startchrono" text="Start" />
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <WebView fx:id="view_web" prefHeight="521.0" prefWidth="1168.0" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
