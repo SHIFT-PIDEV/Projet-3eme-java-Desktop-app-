@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" fx:id="label" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ajouter_rating_controller">
+   <children>
+      <Label layoutX="66.0" layoutY="53.0" text="Commentaire:" />
+      <TextArea fx:id="tf_commentaireR" layoutX="163.0" layoutY="53.0" prefHeight="72.0" prefWidth="323.0" />
+      <Label layoutX="66.0" layoutY="183.0" text="Vous pouvez noter:" />
+      <Button fx:id="btn_ajouterR" layoutX="408.0" layoutY="287.0" mnemonicParsing="false" onAction="#ajouter_rating" text="Valider" />
+      <TextField fx:id="tf_recuperer" layoutX="242.0" layoutY="357.0" promptText="ID textField" />
+      <Button fx:id="btn_recuperer" layoutX="152.0" layoutY="357.0" mnemonicParsing="false" onAction="#recuperer_rating" text="recuperer" />
+      <Button fx:id="btn_modifier" layoutX="404.0" layoutY="357.0" mnemonicParsing="false" onAction="#modifier_rating" text="Modifier" />
+      <Label fx:id="lbl" layoutX="404.0" layoutY="211.0" prefHeight="47.0" prefWidth="176.0" />
+      <Label fx:id="msg" layoutX="408.0" layoutY="226.0" prefHeight="17.0" prefWidth="115.0" />
+      <HBox layoutX="206.0" layoutY="173.0" prefHeight="47.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="img_v1" fitHeight="42.0" fitWidth="46.0" onMouseClicked="#changecolor1" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/white_star.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img_v2" fitHeight="42.0" fitWidth="46.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#changecolor2" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/white_star.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img_v3" fitHeight="42.0" fitWidth="46.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#changecolor3" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/white_star.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img_v4" fitHeight="42.0" fitWidth="46.0" layoutX="56.0" layoutY="10.0" onMouseClicked="#changecolor4" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/white_star.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img_v5" fitHeight="42.0" fitWidth="46.0" layoutX="148.0" layoutY="10.0" onMouseClicked="#changecolor5" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/white_star.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <Label fx:id="msg" layoutX="251.0" layoutY="226.0" prefHeight="17.0" prefWidth="131.0" />
+   </children>
+</AnchorPane>
