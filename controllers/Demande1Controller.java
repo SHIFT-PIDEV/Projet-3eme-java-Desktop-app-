@@ -5,7 +5,6 @@
  */
 package controllers;
 
-import static com.neovisionaries.i18n.LanguageCode.cv;
 import java.net.URL;
 import entities.Demande;
 
@@ -14,48 +13,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import dao.DemandeDao;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import entities.Reclamation;
-import java.io.File;
-import java.io.IOException;
-import java.time.Duration;
 import java.util.Properties;
-import java.util.function.Predicate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.SwipeEvent;
-import javafx.stage.Stage;
-import javax.swing.JFileChooser;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -70,6 +38,19 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
+import com.twilio.Twilio;
+import static com.twilio.example.Example.ACCOUNT_SID;
+import static com.twilio.example.ValidationExample.AUTH_TOKEN;
+import entities.Client;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import upgradi.Upgradi;
 
 /**
  * FXML Controller class
@@ -89,6 +70,7 @@ public class Demande1Controller implements Initializable {
     private TableColumn<Demande, String> objetColonne;
     @FXML
     private TableColumn<Demande, String> descriptionColonne;
+    @FXML
     private TableColumn<Demande, String> cvColonne;
     @FXML
     private TextField idlab;
@@ -96,6 +78,7 @@ public class Demande1Controller implements Initializable {
     private TextField objetlab;
     @FXML
     private TextArea objetdes;
+    @FXML
     private TextField cvlab;
     @FXML
     private Button supprimer;
@@ -117,6 +100,7 @@ public class Demande1Controller implements Initializable {
     private TextField searchBar;
     @FXML
     private Button devFormateur;
+    private Client c;
 
     /**
      * Initializes the controller class.
@@ -206,13 +190,6 @@ public class Demande1Controller implements Initializable {
          
     }         
 
-    private String attach(MouseEvent event) {
-        JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File f=chooser.getSelectedFile();
-        String filename=f.getAbsolutePath();
-        return filename;
-    }
 
     @FXML
     private void mail(ActionEvent event) throws MessagingException {
@@ -266,21 +243,31 @@ public class Demande1Controller implements Initializable {
         alert.show();
     }
 
-    private void back(ActionEvent event) {
-         try {
-                Parent page1 = FXMLLoader.load(getClass().getResource("/views/eventsView.fxml"));
-                Scene scene = new Scene(page1);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-                  
-
-
-     
-            } catch (IOException ex) {
-                Logger.getLogger(ReclamationController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    }
+    
+ private void memePage(Object event){
+              FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/Demande1.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+               Demande1Controller fev=Loader.getController();
+               fev.c=this.c;
+               
+                Parent p=Loader.getRoot();
+                Stage frontView ;
+                if(event instanceof MouseEvent){
+                    frontView= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
+                }
+                else{
+                    frontView = (Stage) ((Node) ((ActionEvent)event).getSource()).getScene().getWindow();
+                }
+                Scene scene = new Scene(p);
+                frontView.setScene(scene);
+                frontView.show(); 
+          }
 
     @FXML
     private void showDashbord(MouseEvent event) {
@@ -292,14 +279,36 @@ public class Demande1Controller implements Initializable {
 
     @FXML
     private void reclamation(MouseEvent event) {
+         try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/views/Reclamation1.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     @FXML
     private void demande(MouseEvent event) {
+        try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/views/Demande1.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(DemandeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     @FXML
     private void deconnecter(MouseEvent event) {
+         Upgradi u=new Upgradi();
+        Stage s=(Stage)this.devFormateur.getScene().getWindow();
+        s.close();
+        u.callStart();
     }
 
     @FXML
@@ -308,6 +317,7 @@ public class Demande1Controller implements Initializable {
 
     @FXML
     private void refreshPage(MouseEvent event) {
+       this.memePage(event);
     }
 
     @FXML
@@ -322,13 +332,18 @@ public class Demande1Controller implements Initializable {
     private void devenirFormateur(ActionEvent event) {
     }
 
-    private String attach(ActionEvent event) {
-               JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File f=chooser.getSelectedFile();
-        String filename=f.getAbsolutePath();
-        return filename;
+    
+
+    @FXML
+    private void sms(MouseEvent event) {
+      
     }
+        
+
+   
+    
+
+
 
    
 

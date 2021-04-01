@@ -7,23 +7,16 @@ package controllers;
 
 import controllers.ListData2;
 import dao.ReclamationDao;
-import entities.Demande;
-import entities.InscriEvent;
+import entities.Client;
 import entities.Reclamation;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -41,9 +34,12 @@ import javax.mail.Transport;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -54,7 +50,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import services.InscriEventS;
+import org.controlsfx.control.Notifications;
+import upgradi.Upgradi;
+
 
 /**
  * FXML Controller class
@@ -101,6 +99,7 @@ private ListData2 listdata = new ListData2();
     private Button sms;
     @FXML
     private Button mail;
+    private Client c;
 
     /**
      * Initializes the controller class.
@@ -147,12 +146,23 @@ private ListData2 listdata = new ListData2();
                 .getDescription());
        });
         supprimer.setOnAction(event -> {
-                    
+                                                                 Image img = new Image ("/controllers/check.png");
+
                  int x=  Integer.parseInt(idlab.getText());
                  ReclamationDao pdao = ReclamationDao.getInstance();
                   Reclamation p =          pdao.displayById(x);
                   pdao.delete(p);
-          
+                  Notifications notificationBuilder = null;
+                    notificationBuilder = Notifications.create()                
+                            .title("supprimer demande")
+                            .text("demande supprimer avec succés!").darkStyle()
+                            .graphic(new ImageView (img))
+                            .position(Pos.TOP_RIGHT)
+                            .onAction((ActionEvent event1) -> {
+                                System.out.println("Clicked on notification");
+                          });
+                       notificationBuilder.show();
+
                 });
                     ReclamationDao pdao=ReclamationDao.getInstance();
         recla= pdao.displayAll();
@@ -251,31 +261,36 @@ private ListData2 listdata = new ListData2();
         alert.setContentText("reclamtion supprimer check your Mail");
         alert.show();
     }
-
-    private void sms(ActionEvent event) throws UnsupportedEncodingException, IOException {
-        	String message = "Junk characters? method sendMultipartTextMessage only send text message. If you want to send non text message, you should look to method sendDataMessage. Below is the code excerpt from android cts. It has example on how to send long messages.";		
-		String phone = "92900570";
-		String username = "hajer";
-		String password = "1234";
-		String address = "http://192.168.1.134";
-		String port = "8090";
-		
-		URL url = new URL(
-				address+":"+port+"/SendSMS?username="+username+"&password="+password+
-				"&phone="+phone+"&message="+URLEncoder.encode(message,"UTF-8"));
-		
-		URLConnection connection = url.openConnection();
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-		String inputLine;
-		while((inputLine = bufferedReader.readLine()) !=null){
-			System.out.println(inputLine);
-		}
-		bufferedReader.close();
-		
-
+ private void memePage(Object event){
+              FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/Reclamation1.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+               Reclamation1Controller fev=Loader.getController();
+               fev.c=this.c;
+               
+                Parent p=Loader.getRoot();
+                Stage frontView ;
+                if(event instanceof MouseEvent){
+                    frontView= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
+                }
+                else{
+                    frontView = (Stage) ((Node) ((ActionEvent)event).getSource()).getScene().getWindow();
+                }
+                Scene scene = new Scene(p);
+                frontView.setScene(scene);
+                frontView.show(); 
+          }
+    private void sms(ActionEvent event) {
+        	
+   
 	}
 
-   
+
 
 
     @FXML
@@ -284,14 +299,36 @@ private ListData2 listdata = new ListData2();
 
     @FXML
     private void reclamation(MouseEvent event) {
+         try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/views/Reclamation1.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     @FXML
     private void demande(MouseEvent event) {
+        try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/views/Demande1.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(DemandeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     @FXML
     private void deconnecter(MouseEvent event) {
+         Upgradi u=new Upgradi();
+        Stage s=(Stage)this.devFormateur.getScene().getWindow();
+        s.close();
+        u.callStart();
     }
 
     @FXML
@@ -300,6 +337,7 @@ private ListData2 listdata = new ListData2();
 
     @FXML
     private void refreshPage(MouseEvent event) {
+        this.memePage(event);
     }
 
     @FXML

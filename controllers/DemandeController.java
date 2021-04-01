@@ -15,40 +15,34 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import dao.DemandeDao;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import entities.Client;
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.SwipeEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
+import org.controlsfx.control.Notifications;
+import upgradi.Upgradi;
 
 /**
  * FXML Controller class
@@ -113,6 +107,7 @@ public class DemandeController implements Initializable {
     private TextField searchBar;
     @FXML
     private Button devFormateur;
+    private Client c;
 
     /**
      * Initializes the controller class.
@@ -123,6 +118,8 @@ public class DemandeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
          ajouter3.setOnAction((ActionEvent event) -> {
+                                           Image img = new Image ("/controllers/check.png");
+
              if ((!(id.getText() == null || id.getText().trim().isEmpty()))&&(!(objet.getText() == null || objet.getText().trim().isEmpty()))&&(!(description.getText() == null || description.getText().trim().isEmpty()))&&(!(cv.getText() == null || cv.getText().trim().isEmpty())))
              {
                  Demande p = new Demande (Integer.parseInt(id.getText()), objet.getText(), description.getText(), cv.getText());
@@ -130,11 +127,18 @@ public class DemandeController implements Initializable {
                  DemandeDao pdao = DemandeDao.getInstance();
                  pdao.insert(p);
                  
-                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                 alert.setTitle("Information Dialog");
-                 alert.setHeaderText(null);
-                 alert.setContentText("Demande insérée avec succés!");
-                 alert.show();
+                 Notifications notificationBuilder = null;
+                    notificationBuilder = Notifications.create()                
+                            .title("supprimer demande")
+                            .text("demande ajouter avec succés!").darkStyle()
+                            .graphic(new ImageView (img))
+                            .position(Pos.TOP_RIGHT)
+                            .onAction((ActionEvent event1) -> {
+                                System.out.println("Clicked on notification");
+                          });
+                       notificationBuilder.show();
+             
+
                  
              }
              Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -170,17 +174,45 @@ public class DemandeController implements Initializable {
                     .getCv());
          });
           supprimer.setOnAction((ActionEvent event) -> {
+                                                         Image img = new Image ("/controllers/check.png");
+
               int x=  Integer.parseInt(idlab.getText());
               DemandeDao pdao = DemandeDao.getInstance();
               Demande p;
               p = pdao.displayById(x);
               pdao.delete(p);
+              Notifications notificationBuilder = null;
+                    notificationBuilder = Notifications.create()                
+                            .title("supprimer demande")
+                            .text("demande supprimer avec succés!").darkStyle()
+                            .graphic(new ImageView (img))
+                            .position(Pos.TOP_RIGHT)
+                            .onAction((ActionEvent event1) -> {
+                                System.out.println("Clicked on notification");
+                          });
+                       notificationBuilder.show();
+
+                
          });
                  modifier.setOnAction((ActionEvent event) -> {
+                                                                Image img = new Image ("/controllers/check.png");
+
                      int x=  Integer.parseInt(idlab.getText());
                      Demande p1 = new Demande (Integer.parseInt(idlab.getText()), objetlab.getText(), objetdes.getText(), cvlab.getText());
                      DemandeDao pdao = DemandeDao.getInstance();
                      pdao.update(p1);
+                     Notifications notificationBuilder = null;
+                    notificationBuilder = Notifications.create()                
+                            .title("supprimer demande")
+                            .text("demande modifier avec succés!").darkStyle()
+                            .graphic(new ImageView (img))
+                            .position(Pos.TOP_RIGHT)
+                            .onAction((ActionEvent event1) -> {
+                                System.out.println("Clicked on notification");
+                          });
+                       notificationBuilder.show();
+
+                
          });
                   DemandeDao pdao2=DemandeDao.getInstance();
         recla2= pdao2.displayAll();
@@ -268,6 +300,30 @@ public class DemandeController implements Initializable {
             }
     }
 
+ private void memePage(Object event){
+              FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/Demande2.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+               DemandeController fev=Loader.getController();
+               fev.c=this.c;
+               
+                Parent p=Loader.getRoot();
+                Stage frontView ;
+                if(event instanceof MouseEvent){
+                    frontView= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
+                }
+                else{
+                    frontView = (Stage) ((Node) ((ActionEvent)event).getSource()).getScene().getWindow();
+                }
+                Scene scene = new Scene(p);
+                frontView.setScene(scene);
+                frontView.show(); 
+          }
     @FXML
     private void showDashbord(MouseEvent event) {
     }
@@ -278,14 +334,36 @@ public class DemandeController implements Initializable {
 
     @FXML
     private void reclamation(MouseEvent event) {
+         try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/views/Reclamation2.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     @FXML
     private void demande(MouseEvent event) {
+        try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/views/Demande2.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(DemandeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     @FXML
     private void deconnecter(MouseEvent event) {
+         Upgradi u=new Upgradi();
+        Stage s=(Stage)this.devFormateur.getScene().getWindow();
+        s.close();
+        u.callStart();
     }
 
     @FXML
@@ -294,6 +372,7 @@ public class DemandeController implements Initializable {
 
     @FXML
     private void refreshPage(MouseEvent event) {
+        this.memePage(event);
     }
 
     @FXML

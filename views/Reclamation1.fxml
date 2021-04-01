@@ -17,10 +17,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Demande1Controller">
-   <stylesheets>
-      <URL value="@StyleSheet.css" />
-   </stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Reclamation1Controller">
+    <stylesheets>
+        <URL value="@StyleSheet.css" />
+    </stylesheets>
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1110.0" stylesheets="@dashbord.css">
          <top>
@@ -313,7 +313,7 @@
                               <URL value="@StyleSheet.css" />
                            </stylesheets>
                            <children>
-                              <AnchorPane layoutX="-1.0" layoutY="-3.0" prefHeight="479.0" prefWidth="210.0" style="-fx-background-color: #0598ff;">
+                              <AnchorPane layoutX="-1.0" layoutY="-3.0" prefHeight="504.0" prefWidth="210.0" style="-fx-background-color: #0598ff;">
                                  <children>
                                     <ImageView fitHeight="82.0" fitWidth="108.0" layoutX="59.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -327,25 +327,13 @@
                                     </Text>
                                  </children>
                               </AnchorPane>
-                              <TableView fx:id="reclaTable" layoutX="280.0" layoutY="68.0" prefHeight="200.0" prefWidth="525.0">
-                                 <columns>
-                                    <TableColumn fx:id="idColonne" prefWidth="87.0" text="identifiant" />
-                                    <TableColumn fx:id="objetColonne" prefWidth="102.0" text="Objet" />
-                                    <TableColumn fx:id="descriptionColonne" prefWidth="154.0" text="Description" />
-                                    <TableColumn fx:id="cvColonne" prefWidth="100.0" text="CV" />
-                                 </columns>
-                              </TableView>
                               <TextField fx:id="filterField" layoutX="687.0" layoutY="28.0" />
-                              <TextField fx:id="idlab" layoutX="272.0" layoutY="294.0" promptText="Identifiant Utilisateur" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                              <TextField fx:id="objetlab" layoutX="583.0" layoutY="294.0" promptText="Objet" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                              <TextArea fx:id="objetdes" layoutX="255.0" layoutY="341.0" prefHeight="67.0" prefWidth="210.0" promptText="Description" style="-fx-border-color: #0598ff;" />
-                              <TextField fx:id="cvlab" layoutX="583.0" layoutY="348.0" promptText="cv" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                               <Button fx:id="supprimer" layoutX="549.0" layoutY="425.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" style="-fx-background-color: #878585;" text="Delete" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="sms" layoutX="736.0" layoutY="421.0" mnemonicParsing="false" onMousePressed="#sms" prefHeight="37.0" prefWidth="100.0" style="-fx-background-color: #878585;" text="Send SMS" textFill="WHITE">
+                              <Button fx:id="sms" layoutX="736.0" layoutY="421.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="100.0" style="-fx-background-color: #878585;" text="Send SMS" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -355,6 +343,16 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
+                              <TableView fx:id="reclaTable" layoutX="334.0" layoutY="93.0" prefHeight="150.0" prefWidth="456.0">
+                                 <columns>
+                                    <TableColumn fx:id="idColonne" prefWidth="87.0" text="identifiant" />
+                                    <TableColumn fx:id="objetColonne" prefWidth="102.0" text="Objet" />
+                                    <TableColumn fx:id="descriptionColonne" prefWidth="266.0" text="Description" />
+                                 </columns>
+                              </TableView>
+                              <TextField fx:id="idlab" layoutX="349.0" layoutY="259.0" promptText="Identifiant Utilisateur" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                              <TextField fx:id="objetlab" layoutX="622.0" layoutY="259.0" promptText="Objet" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                              <TextArea fx:id="objetdes" layoutX="463.0" layoutY="299.0" prefHeight="46.0" prefWidth="210.0" promptText="Description" style="-fx-border-color: #0598ff;" />
                            </children>
                         </AnchorPane>
                      </children>

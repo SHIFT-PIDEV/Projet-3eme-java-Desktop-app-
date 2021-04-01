@@ -5,43 +5,45 @@
  */
 package controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import entities.Reclamation;
 import dao.ReclamationDao;
+import entities.Client;
+import java.io.IOException;
 import javafx.event.ActionEvent;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
+import org.controlsfx.control.Notifications;
+import java.time.Duration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import upgradi.Upgradi;
+
 
 /**
  * FXML Controller class
@@ -95,6 +97,7 @@ private ListData2 listdata = new ListData2();
     private TextField searchBar;
     @FXML
     private Button devFormateur;
+    private Client c;
 
     /**
      * Initializes the controller class.
@@ -143,42 +146,102 @@ private ListData2 listdata = new ListData2();
                 .get(reclaTable.getSelectionModel().getSelectedIndex())
                 .getDescription());
         });
-        ajouter3.setOnAction(event -> {
-            if ((!(id.getText() == null || id.getText().trim().isEmpty()))&&(!(objet.getText() == null || objet.getText().trim().isEmpty()))&&(!(description.getText() == null || description.getText().trim().isEmpty())))
-                    {
-            Reclamation p = new Reclamation (Integer.parseInt(id.getText()), objet.getText(), description.getText());
-        
-            ReclamationDao pdao = ReclamationDao.getInstance();
-            pdao.insert(p);
-        
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Personne insérée avec succés!");
-        alert.show();
+        ajouter3.setOnAction(new EventHandler<ActionEvent>() {
+            
+             Image img = new Image ("/controllers/check.png");
+                    
+                        
+                        @Override
+            public void handle(ActionEvent event) {
+                if ((!(id.getText() == null || id.getText().trim().isEmpty()))&&(!(objet.getText() == null || objet.getText().trim().isEmpty()))&&(!(description.getText() == null || description.getText().trim().isEmpty())))
+                {
+                    Reclamation p = new Reclamation (Integer.parseInt(id.getText()), objet.getText(), description.getText());
+                    
+                    ReclamationDao pdao = ReclamationDao.getInstance();
+                    pdao.insert(p);
+                    
+Notifications notificationBuilder;
+                    notificationBuilder = Notifications.create()                
+                            .title("Ajouter Reclamation")
+                            .text("reclamation insérée avec succés!").darkStyle()
+                            .graphic(new ImageView (img))
+                            .position(Pos.TOP_RIGHT)
+                            .onAction((ActionEvent event1) -> {
+                                System.out.println("Clicked on notification");
+                    });
+                    
+                   
 
+                    
+                
+                                                                           notificationBuilder.show();
 
-                    }
-             Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Reclamation non valide!");
-        alert.show();
+            
+                }
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+             alert.setTitle("Information Dialog");
+             alert.setHeaderText(null);
+             alert.setContentText("reclamation non valide !");
+             alert.show();
+
+            }
+            
+
+            
+
+            
+           
         });
           supprimer.setOnAction(event -> {
+                           Image img = new Image ("/controllers/check.png");
+
                     
                  int x=  Integer.parseInt(idlab.getText());
                  ReclamationDao pdao = ReclamationDao.getInstance();
                   Reclamation p =          pdao.displayById(x);
                   pdao.delete(p);
+                  Notifications notificationBuilder = null;
+                    notificationBuilder = Notifications.create()                
+                            .title("modifier Reclamation")
+                            .text("reclamation modifier avec succés!").darkStyle()
+                            .graphic(new ImageView (img))
+                            .position(Pos.TOP_RIGHT)
+                            .onAction((ActionEvent event1) -> {
+                                System.out.println("Clicked on notification");
+                                           
+           
+
+                    });
+                    notificationBuilder.show();
+                   });  
+                   
+
+                    
+
           
-                });
+                
                  modifier.setOnAction(event->{
+                                             Image img = new Image ("/controllers/check.png");
+
+                  
                         int x=  Integer.parseInt(idlab.getText());
             Reclamation p1 = new Reclamation (Integer.parseInt(idlab.getText()), objetlab.getText(), objetdes.getText());
                      ReclamationDao pdao = ReclamationDao.getInstance();
                      pdao.update(p1);
+                        Notifications notificationBuilder = null;
+                    notificationBuilder = Notifications.create()                
+                            .title("supprimer Reclamation")
+                            .text("reclamation supprimer avec succés!").darkStyle()
+                            .graphic(new ImageView (img))
+                            .position(Pos.TOP_RIGHT)
+                            .onAction((ActionEvent event1) -> {
+                                System.out.println("Clicked on notification");
+
         });
+                       notificationBuilder.show();
+                 
+                     });
+           
            ReclamationDao pdao=ReclamationDao.getInstance();
         recla= pdao.displayAll();
 
@@ -223,8 +286,31 @@ private ListData2 listdata = new ListData2();
 		// 5. Add sorted (and filtered) data to the table.
 		reclaTable.setItems(sortedData);     
     }    
-
-   
+ private void memePage(Object event){
+              FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/Reclamation2.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+              ReclamationController fev=Loader.getController();
+               fev.c=this.c;
+               
+                Parent p=Loader.getRoot();
+                Stage frontView ;
+                if(event instanceof MouseEvent){
+                    frontView= (Stage) ((Node) ((MouseEvent)event).getSource()).getScene().getWindow();
+                }
+                else{
+                    frontView = (Stage) ((Node) ((ActionEvent)event).getSource()).getScene().getWindow();
+                }
+                Scene scene = new Scene(p);
+                frontView.setScene(scene);
+                frontView.show(); 
+          }
+                  
     @FXML
     private void showDashbord(MouseEvent event) {
     }
@@ -234,15 +320,37 @@ private ListData2 listdata = new ListData2();
     }
 
     @FXML
-    private void reclamation(MouseEvent event) {
+    private void reclamation(MouseEvent event) throws IOException {
+         try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/views/Reclamation2.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     @FXML
     private void demande(MouseEvent event) {
+        try {
+                Parent page1 = FXMLLoader.load(getClass().getResource("/views/Demande2.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(DemandeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     @FXML
     private void deconnecter(MouseEvent event) {
+         Upgradi u=new Upgradi();
+        Stage s=(Stage)this.devFormateur.getScene().getWindow();
+        s.close();
+        u.callStart();
     }
 
     @FXML
@@ -251,6 +359,7 @@ private ListData2 listdata = new ListData2();
 
     @FXML
     private void refreshPage(MouseEvent event) {
+        this.memePage(event);
     }
 
     @FXML
