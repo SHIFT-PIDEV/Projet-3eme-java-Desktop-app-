@@ -146,17 +146,22 @@ public class EventsViewController implements Initializable {
 
     @FXML
     private void showDashbord(MouseEvent event) {
-        Parent page1 = null;
+        FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/dashbordv2.fxml"));
         try {
-            page1= FXMLLoader.load(getClass().getResource("/views/dashbord.fxml"));
+            Loader.load();  
         } catch (IOException ex) {
-            Logger.getLogger(EventsViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyNotificationsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-                Scene scene = new Scene(page1);
-                
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
+        
+               Dashbordv2Controller dv2=Loader.getController();
+              dv2.setData();
+                Parent p=Loader.getRoot();
+                Stage s ;
+                s = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(p);
+                s.setScene(scene);
+                s.show(); 
     }
 
     @FXML

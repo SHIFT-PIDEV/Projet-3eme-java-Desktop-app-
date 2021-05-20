@@ -133,5 +133,18 @@ public class InscriEventS {
         return list;
         
     }
+     public int displayAllInscriEvent(){
+        String req="select count(*) from inscrievent  ";
+        int n=0;
+        try {
+            rs=st.executeQuery(req);
+            rs.next();
+            n=rs.getInt(1);
+                    
+        } catch (SQLException ex) {
+            Logger.getLogger(LikeS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
+    }
     
 }

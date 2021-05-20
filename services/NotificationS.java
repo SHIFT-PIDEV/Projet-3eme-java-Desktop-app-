@@ -43,7 +43,7 @@ public class NotificationS {
     }
     
     public void insertNot(int idcS,int idcD,int idevent){
-        String req="insert into notification values('"+idcS+"','"+idcD+"','"+idevent+"') ";
+        String req="insert into notification(idcs,idcd,idevent) values('"+idcS+"','"+idcD+"','"+idevent+"') ";
         try {
             st.executeUpdate(req);
         } catch (SQLException ex) {
@@ -59,9 +59,9 @@ public class NotificationS {
             rs=st.executeQuery(req);
             while(rs.next()){
                 Notification i=new Notification();
-                i.setIdcS(rs.getInt(1));
-                i.setIdcD(rs.getInt(2));
-                i.setIdevent(rs.getInt(3));
+                i.setIdcS(rs.getInt(2));
+                i.setIdcD(rs.getInt(3));
+                i.setIdevent(rs.getInt(4));
                     String req1="select * from event where idevent='"+i.getIdevent()+"'";
                     rs1=st1.executeQuery(req1);
                     while(rs1.next()){
@@ -95,9 +95,9 @@ public class NotificationS {
             rs=st.executeQuery(req);
             while(rs.next()){
                 Notification i=new Notification();
-                i.setIdcS(rs.getInt(1));
-                i.setIdcD(rs.getInt(2));
-                i.setIdevent(rs.getInt(3));
+                i.setIdcS(rs.getInt(2));
+                i.setIdcD(rs.getInt(3));
+                i.setIdevent(rs.getInt(4));
                 list.add(i);
             }
             
@@ -109,6 +109,20 @@ public class NotificationS {
      
      public int displayAllbyIdEvent(int idevent){
         String req="select count(*) from notification where idevent='"+idevent+"' ";
+        int n=0;
+        try {
+            rs=st.executeQuery(req);
+            rs.next();
+            n=rs.getInt(1);
+                    
+        } catch (SQLException ex) {
+            Logger.getLogger(LikeS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
+    }
+     
+      public int displayAllShare(){
+        String req="select count(*) from notification  ";
         int n=0;
         try {
             rs=st.executeQuery(req);

@@ -94,19 +94,21 @@ public class LoginController implements Initializable {
        }
        else if(this.username.getText().equals("admin")==true&&this.password.getText().equals("admin")==true){
            FXMLLoader Loader=new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/views/eventsView.fxml"));
+        Loader.setLocation(getClass().getResource("/views/dashbordv2.fxml"));
         try {
             Loader.load();  
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Dashbordv2Controller dv2c=Loader.getController();
+              dv2c.setData();
                 Parent p=Loader.getRoot();
-                Stage frontView=new Stage();
+                Stage dashbord=new Stage();
                 Scene scene = new Scene(p);
-                frontView.setScene(scene);
+                dashbord.setScene(scene);
                 Stage s=(Stage)this.btn_login.getScene().getWindow();
                 s.close();
-                frontView.show();
+                dashbord.show();
        }
        else{
               try {

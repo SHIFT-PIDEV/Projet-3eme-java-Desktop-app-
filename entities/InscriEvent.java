@@ -6,8 +6,6 @@
 package entities;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-
 /**
  *
  * @author asus

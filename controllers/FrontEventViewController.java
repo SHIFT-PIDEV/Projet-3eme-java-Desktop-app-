@@ -312,5 +312,27 @@ public class FrontEventViewController implements Initializable {
                 s.setScene(scene);
                 s.show();
     }
+
+    @FXML
+    private void toPanier(MouseEvent event) {
+        FXMLLoader Loader=new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/views/monPanier.fxml"));
+        try {
+            Loader.load();  
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+               MonPanierController mpc=Loader.getController();
+               mpc.c=this.c;
+               mpc.setNameUser();
+               mpc.afficherAll();
+                Parent p=Loader.getRoot();
+                Stage myPanier;
+               myPanier= (Stage) ((Node) event.getSource()).getScene().getWindow();
+               Scene scene = new Scene(p);
+                myPanier.setScene(scene);
+                myPanier.show();
+    }
     
 }

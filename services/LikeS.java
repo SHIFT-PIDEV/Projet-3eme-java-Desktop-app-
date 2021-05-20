@@ -37,7 +37,7 @@ public class LikeS {
         return ls;
     }
     public void insertLike(Like like){
-        String req="insert into likeevent values('"+like.getIdEvent()+"','"+like.getIdClient()+"')";
+        String req="insert into likeevent(idevent,idclient) values('"+like.getIdEvent()+"','"+like.getIdClient()+"')";
         try {
             st.executeUpdate(req);
         } catch (SQLException ex) {
@@ -59,8 +59,8 @@ public class LikeS {
         try {
             rs=st.executeQuery(req);
             rs.next();
-             like.setIdEvent(rs.getInt(1));
-            like.setIdClient(rs.getInt(2));
+             like.setIdEvent(rs.getInt(2));
+            like.setIdClient(rs.getInt(3));
            
         } catch (SQLException ex) {
             //Logger.getLogger(LikeS.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,5 +81,19 @@ public class LikeS {
             Logger.getLogger(LikeS.class.getName()).log(Level.SEVERE, null, ex);
         }
         return n;
+    }
+    public int nbrAllLike(){
+        int nbrLike=0;
+           String req="select count(*) from likeevent ";
+        
+        try {
+            rs=st.executeQuery(req);
+            rs.next();
+            nbrLike=rs.getInt(1);
+                    
+        } catch (SQLException ex) {
+            Logger.getLogger(LikeS.class.getName()).log(Level.SEVERE, null, ex);
+        }      
+        return nbrLike;
     }
 }

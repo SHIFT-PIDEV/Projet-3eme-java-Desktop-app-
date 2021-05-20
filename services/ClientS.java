@@ -109,4 +109,16 @@ public class ClientS {
             Logger.getLogger(ClientS.class.getName()).log(Level.SEVERE, null, ex);
         }
      }
+     public int displayAllUsers(){
+         int nbrUsers=0;
+         String req="select count(*) from client";
+        try {
+            rs=st.executeQuery(req);
+            rs.next();
+            nbrUsers=rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nbrUsers;
+     }
 }

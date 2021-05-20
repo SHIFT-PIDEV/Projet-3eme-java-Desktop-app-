@@ -16,6 +16,9 @@ and open the template in the editor.
 .hover-fade:hover{
     -fx-background-color:#D8D8D8 !important;
 }
+.hover-fade1:hover{
+    -fx-background-color:#0fbcf9 !important;
+}
 .cursor_hand{
     -fx-cursor:hand;
 }
